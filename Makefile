@@ -31,7 +31,7 @@ make-library-debug:
 	$(MAKE) -C $(LIBFT_PATH) debug
 
 $(NAME): $(OBJS) $(HEADER)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBRARY_FLAG) $(EXEC-NAME-FLAG) $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIB_FLAGS) $(EXEC-NAME-FLAG) $(NAME)
 
 clean:
 	$(MAKE) clean -C $(LIBFT_PATH)

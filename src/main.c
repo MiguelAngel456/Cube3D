@@ -6,23 +6,24 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:30:36 by juestrel          #+#    #+#             */
-/*   Updated: 2024/09/25 19:48:04 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/09/25 19:51:55 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube3D.h"
-#include <stdio.h> //Borrar luego
 
 static void cube_draw(mlx_image_t *img)
 {
     unsigned int color = 255 << 24 | 255 << 16 | 0 << 8 | 255;
     unsigned int size = 16;
 
-    for (unsigned int y = (HEIGHT/2) - size; y < HEIGHT/2; y++)
+    for (unsigned int y = 0 ; y < size; y++)
     {
-        for (unsigned int x = (WIDTH/2) - size; x < WIDTH/2; x++) 
+        for (unsigned int x = 0; x < size; x++) 
             mlx_put_pixel(img, x, y, color);
     }
+    img->instances[0].y += HEIGHT/2;
+    img->instances[0].x += WIDTH/2;
 }
 
 static void hooks(void *param)
@@ -48,7 +49,7 @@ int	main(void)
     main.mlx = mlx_init(1920, 1080, "cube3D", true);
     if (!main.mlx)
         return(1);
-    main.img = mlx_new_image(main.mlx, WIDTH, HEIGHT);
+    main.img = mlx_new_image(main.mlx, 16, 16);
     if (!main.img || (mlx_image_to_window(main.mlx, main.img, 0, 0) < 0))
 		return (1);
     cube_draw(main.img);

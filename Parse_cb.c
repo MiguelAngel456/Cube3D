@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 11:42:24 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/09/24 16:57:47 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/09/25 16:04:38 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	free_matrix(char **matrix)
 	free(matrix);
 }
 
-void	save_map(char *path, int j, int count_line, t_data_map *data_map)
+static void	save_map(char *path, int j, int count_line, t_data_map *data_map)
 {
 	int		fd;
 	int		i;
@@ -52,24 +52,29 @@ void	save_map(char *path, int j, int count_line, t_data_map *data_map)
 	close(fd);
 }
 
-void	save_data(char *line, int i, char **pth)
+static void	save_data(char *line, int i, char **pth, int pos)
 {
 	char	**aux;
 
 	aux = ft_split(line, ' ');
-	pth[i] = ft_strdup(aux[1]);
+	pth[pos] = ft_strdup(aux[1]);
 	free_matrix(aux);
 }
 
-int	aux(char *line, int cont[3], t_data_map *data_map, int count_line)
+static int	aux(char *line, int cont[3], t_data_map *data_map, int count_line)
 {
-	if ((ft_strncmp(line, "NO ", 3) == 0 || ft_strncmp(line, "SO ", 3) == 0
-			|| ft_strncmp(line, "WE ", 3) == 0 || ft_strncmp(line, "EA ",
-				3) == 0) && cont[0] <= 4)
-		save_data(line, cont[0]++, data_map->pth_img);
-	else if ((ft_strncmp(line, "F ", 2) == 0 || ft_strncmp(line, "C ", 2) == 0)
-		&& cont[1] <= 2)
-		save_data(line, cont[1]++, data_map->clr_rng);
+	if (ft_strncmp(line, "NO ", 3) == 0 && cont[0] <= 4)
+		save_data(line, cont[0]++, data_map->pth_img, NO);
+	else if (ft_strncmp(line, "SO ", 3) == 0 && cont[0] <= 4)
+		save_data(line, cont[0]++, data_map->pth_img, SO);
+	else if (ft_strncmp(line, "WE ", 3) == 0 && cont[0] <= 4)
+		save_data(line, cont[0]++, data_map->pth_img, WE);
+	else if (ft_strncmp(line, "EA ", 3) == 0 && cont[0] <= 4)
+		save_data(line, cont[0]++, data_map->pth_img, EA);
+	else if ((ft_strncmp(line, "F ", 2) == 0) && cont[1] <= 2)
+		save_data(line, cont[1]++, data_map->clr_rng, F);
+	else if ((ft_strncmp(line, "C ", 2) == 0) && cont[1] <= 2)
+		save_data(line, cont[1]++, data_map->clr_rng, C);
 	else if (cont[0] == 4 && cont[1] == 2 && line[0] != '\n')
 		count_line++;
 	cont[2]++;
@@ -105,7 +110,7 @@ void	init_str_map(char *path, t_data_map *data_map)
 	save_map(path, cont[2], count_line, data_map);
 }
 
-int	main(void)
+/* int	main(void)
 {
 	t_data_map	data_map;
 
@@ -151,4 +156,4 @@ int	main(void)
 	free_matrix(data_map.clr_rng);
 	free_matrix(data_map.map);
 	return (0);
-}
+} */

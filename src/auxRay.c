@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 20:10:54 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/01 20:56:20 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/01 21:44:39 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,36 @@ void get_step_and_side_dist(t_ray *ray)
 		ray->step_y = 1;
 		ray->side_dist_y = (ray->map_y + 1.0 - ray->pos_y) * ray->delta_dist_y;
 	}
+}
+
+void dda(t_ray *ray, int map[8][8])
+{
+	while (ray->hit != true)
+	{
+		if (ray->side_dist_x < ray->side_dist_y)
+		{
+			ray->side_dist_x += ray->delta_dist_x;
+			ray->map_x += ray->step_x;
+			ray->side = 0;
+		}
+		else
+		{
+			ray->side_dist_y += ray->delta_dist_y;
+			ray->map_y += ray->step_y;
+			ray->side = 1;
+		}
+		if (map[ray->map_x][ray->map_y] > 0) // If there are errors, invert the access order
+			ray->hit = true;
+	}
+}
+
+void get_height(t_ray *ray)
+{
+	ray->line_height = (int)(HEIGHT/ray->perpWallDist);
+	ray->draw_start = -ray->line_height / 2 + HEIGHT / 2;
+	if (ray->draw_start < 0)
+		ray->draw_start = 0;
+	ray->draw_end = ray->line_height / 2 + HEIGHT / 2;
+	if (ray->draw_end >= HEIGHT)
+		ray->draw_end = HEIGHT - 1;
 }

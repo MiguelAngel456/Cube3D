@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:30:36 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/01 21:04:41 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/01 22:00:26 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
     }
     img->instances[0].y += HEIGHT/2;
     img->instances[0].x += WIDTH/2;
-}
+}*/
 
 static void hooks(void *param)
 {
@@ -32,15 +32,15 @@ static void hooks(void *param)
 
     if(mlx_is_key_down(test->mlx, MLX_KEY_ESCAPE))
         mlx_close_window(test->mlx);
-    if (mlx_is_key_down(test->mlx, MLX_KEY_W))
+    /*if (mlx_is_key_down(test->mlx, MLX_KEY_W))
         test->img->instances[0].y -= 5;
     if (mlx_is_key_down(test->mlx, MLX_KEY_S))
         test->img->instances[0].y += 5;
     if (mlx_is_key_down(test->mlx, MLX_KEY_D))
         test->img->instances[0].x += 5;
     if (mlx_is_key_down(test->mlx, MLX_KEY_A))
-        test->img->instances[0].x -= 5;
-}*/
+        test->img->instances[0].x -= 5;*/
+}
 
 static void skybox(t_tests *main)
 {
@@ -87,6 +87,9 @@ static t_ray init_ray(void)
     raycast.step_y = 0;
     raycast.hit = false;
     raycast.side = 0;
+    raycast.line_height = 0;
+    raycast.draw_start = 0;
+    raycast.draw_end = 0;
     return (raycast);
 }
 
@@ -114,13 +117,19 @@ int	main(void)
     if (!main.img || (mlx_image_to_window(main.mlx, main.img, 0, 0) < 0))
 		return (1);
     //cube_draw(main.img);
-    //mlx_loop_hook(main.mlx, hooks, &main);
+    mlx_loop_hook(main.mlx, hooks, &main);
     skybox(&main);
     t_ray ray = init_ray();
     for (unsigned int x = 0; x < WIDTH; x++)
     {
         get_ray_dir(&ray, x);
         get_step_and_side_dist(&ray);
+        dda(&ray, map);
+        if (ray.side == 0)
+            ray.perpWallDist = ray.side_dist_x - ray.delta_dist_x;
+        else
+            ray.perpWallDist = ray.side_dist_y - ray.delta_dist_y;
+        get_height(&ray);
     }
     mlx_loop(main.mlx);
 	mlx_terminate(main.mlx);

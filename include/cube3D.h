@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:35:59 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/01 21:03:57 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/01 21:53:22 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,13 @@ typedef struct s_ray
 	int			step_y;
 	bool		hit;
 	int			side;
+	int			line_height;
+	int			draw_start;
+	int			draw_end;
 }				t_ray;
 
 void			get_ray_dir(t_ray *ray, unsigned int x);
 void			get_step_and_side_dist(t_ray *ray);
-
+void			dda(t_ray *ray, int map[8][8]);
+void			get_height(t_ray *ray);
 #endif

@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:35:59 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/01 20:16:20 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/01 20:23:04 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,7 @@ typedef struct s_ray
 	bool		hit;
 	int			side;
 }				t_ray;
+
+void			get_ray_dir(t_ray *ray, unsigned int x);
 
 #endif

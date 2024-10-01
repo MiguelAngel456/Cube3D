@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:30:36 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/01 20:17:57 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/01 20:30:54 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ static t_ray init_ray(void)
 {
     t_ray raycast;
 
+    raycast.pos_X = ; //Might need to erase from struct later on
+    raycast.pos_Y = ;  //Might need to erase from struct later on
     raycast.dir_x = -1;
     raycast.dir_y = 0;
     raycast.plane_x = 0;
@@ -69,6 +71,17 @@ static t_ray init_ray(void)
 int	main(void)
 {
     t_tests main;
+    int map [8][8] = 
+    {
+        {1, 1, 1, 1, 1, 1, 1, 1,},
+        {1, 0, 1, 0, 0, 0, 0, 1,},
+        {1, 0, 1, 0, 0, 0, 0, 1,},
+        {1, 0, 1, 0, 0, 0, 0, 1,},
+        {1, 0, 0, 0, 0, 0, 0, 1,},
+        {1, 0, 0, 0, 0, 1, 0, 1,},
+        {1, 0, 0, 0, 0, 0, 0, 1,},
+        {1, 1, 1, 1, 1, 1, 1, 1,},
+    };
 
     main.mlx = mlx_init(1920, 1080, "cube3D", true);
     if (!main.mlx)
@@ -79,6 +92,11 @@ int	main(void)
     //cube_draw(main.img);
     //mlx_loop_hook(main.mlx, hooks, &main);
     t_ray ray = init_ray();
+    for (unsigned int x = 0; x < WIDTH; x++)
+    {
+        get_ray_dir(&ray, x);
+    }
+    
     mlx_loop(main.mlx);
 	mlx_terminate(main.mlx);
 	return (0);

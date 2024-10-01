@@ -4,7 +4,8 @@ HEADER_PATH = include
 
 NAME = cub3D
 
-SCRS = $(SRC_PATH)/main.c
+SCRS = $(SRC_PATH)/main.c\
+$(SRC_PATH)/auxRay.c\
 
 OBJS = $(SCRS:.c=.o)
 

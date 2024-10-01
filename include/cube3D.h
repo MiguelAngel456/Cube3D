@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:35:59 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/01 20:23:04 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/01 21:03:57 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,13 @@
 # ifndef HEIGHT
 #  define HEIGHT 1080
 # endif
+# ifndef INFINITY
+#  define INFINITY 1e30
+# endif
 
 # include "../MLX42/include/MLX42/MLX42.h"
 # include <fcntl.h>
+# include <math.h>
 # include <stdarg.h>
 # include <stdlib.h>
 
@@ -32,8 +36,10 @@ typedef struct s_tests
 
 typedef struct s_ray
 {
-	double		pos_Y;
-	double		pos_X;
+	double pos_y; // Might need to delete later from this struct
+	double pos_x; // Might need to delete later from this struct
+	int map_x;    // Might need to delete later from this struct
+	int map_y;    // Might need to delete later from this struct
 	double		dir_x;
 	double		dir_y;
 	double		plane_x;
@@ -41,8 +47,6 @@ typedef struct s_ray
 	double		camera_x;
 	double		ray_dir_x;
 	double		ray_dir_y;
-	int			map_x;
-	int			map_y;
 	double		side_dist_x;
 	double		side_dist_y;
 	double		delta_dist_x;
@@ -55,5 +59,6 @@ typedef struct s_ray
 }				t_ray;
 
 void			get_ray_dir(t_ray *ray, unsigned int x);
+void			get_step_and_side_dist(t_ray *ray);
 
 #endif

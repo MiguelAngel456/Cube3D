@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:20:53 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/09/27 11:31:37 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/01 15:26:47 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,50 @@ int	chr_checker(t_data_map *data_map)
 	return (0);
 }
 
+int check_line_empty(t_data_map *data_map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (data_map->map[i] != NULL)
+	{
+		j = 0;
+		while (data_map->map[i][j] != '\0')
+		{
+			if (ft_strlen(data_map->map[i]) == 1 && data_map->map[i][j] == '\n')
+			{
+				return (printf("Empty line(s) in map\n"),1);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+int check_rgb_num(t_data_map *data_map)
+{
+	int		i;
+	int		j;
+	char	**split;
+	
+	i = 0;
+	while(data_map->clr_rng[i] != NULL)
+	{
+		
+		split = ft_split(data_map->clr_rng[i], ',');
+		j = 0;
+		while(split[j] != NULL)
+		{
+			if (ft_atoi(split[j]) < 0 || ft_atoi(split[j]) > 256)
+				return (printf("ceiling or floor color range error\n"), 1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
 int	wall_checker(t_data_map *data_map)
 {
 	int	i;
@@ -81,7 +125,7 @@ int	wall_checker(t_data_map *data_map)
 				else if ((x == (ft_strlen(data_map->map[i]) - 1))
 						&& (data_map->map[i][x - 1] != '1'))
 				{
-					printf("The map is not closed/surrounded by walls5.\n");
+					printf("The map is not closed/surrounded by walls.\n");
 					return (1);
 				}
 				else if (x == 0 && (data_map->map[i][x] != ' ' && data_map->map[i][x] != '1'))
@@ -96,7 +140,7 @@ int	wall_checker(t_data_map *data_map)
 						|| data_map->map[i + 1][x] == ' ' 
 						|| data_map->map[i - 1][x] == ' ')))
 				{
-					printf("The map is not closed/surrounded by walls4.\n");
+					printf("The map is not closed/surrounded by walls.\n");
 					return (1);
 				}
 			}
@@ -106,12 +150,6 @@ int	wall_checker(t_data_map *data_map)
 	}
 	return (0);
 }
-
-int check_space(t_data_map *data_map)
-{
-	
-}
-
 
 int	main(void)
 {
@@ -132,9 +170,14 @@ int	main(void)
 	}
 	data_map.clr_rng[2] = NULL;
 	data_map.map = NULL;
-	init_str_map("./prueba.cub", &data_map);
+	if (init_str_map("./prueba.cub", &data_map) == 1)
+	{
+		free_matrix(data_map.pth_img);
+		free_matrix(data_map.clr_rng);
+		exit(EXIT_FAILURE);		
+	}
 	//*************PRUEBA********************
-	if (chr_checker(&data_map) == 1 || wall_checker(&data_map) == 1)
+	if (check_rgb_num(&data_map) || chr_checker(&data_map) == 1 || check_line_empty(&data_map) == 1 || wall_checker(&data_map) == 1 )
 	{
 		free_matrix(data_map.pth_img);
 		free_matrix(data_map.clr_rng);

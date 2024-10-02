@@ -6,24 +6,11 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 11:42:24 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/09/25 16:04:38 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/09/30 12:32:52 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Parse_cb.h"
-
-void	free_matrix(char **matrix)
-{
-	int	i;
-
-	i = 0;
-	while (matrix[i])
-	{
-		free(matrix[i]);
-		i++;
-	}
-	free(matrix);
-}
 
 static void	save_map(char *path, int j, int count_line, t_data_map *data_map)
 {
@@ -80,8 +67,28 @@ static int	aux(char *line, int cont[3], t_data_map *data_map, int count_line)
 	cont[2]++;
 	return (count_line);
 }
+static int check_order(t_data_map *data_map)
+{
+	int	i;
 
-void	init_str_map(char *path, t_data_map *data_map)
+	i = 0;
+	while (i < 4)
+	{
+		if (data_map->pth_img[i] == NULL)
+			return (1);
+		i++;
+	}
+	i = 0;
+	while (i < 2)
+	{
+		if (data_map->clr_rng[i] == NULL)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	init_str_map(char *path, t_data_map *data_map)
 {
 	int		fd;
 	int		cont[3];
@@ -101,13 +108,13 @@ void	init_str_map(char *path, t_data_map *data_map)
 		line = get_next_line(fd);
 	}
 	close(fd);
+	if (check_order(data_map) == 1)
+		return (printf("Error in the order or existence of map elements\n"), 1);
 	data_map->map = malloc(sizeof(char *) * (count_line + 1));
 	if (data_map->map == NULL)
-	{
-		printf("Error al asignar memoria para map\n");
-		return ;
-	}
+		return (printf("Error al asignar memoria para map\n"), 1);
 	save_map(path, cont[2], count_line, data_map);
+	return (0);
 }
 
 /* int	main(void)

@@ -6,11 +6,11 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:20:53 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/01 15:26:47 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/03 11:42:22 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Parse_cb.h"
+#include "../include/Parse_cb.h"
 
 static int matrix_size(char  **matrix)
 {
@@ -79,7 +79,8 @@ int check_rgb_num(t_data_map *data_map)
 	i = 0;
 	while(data_map->clr_rng[i] != NULL)
 	{
-		
+		if (data_map->clr_rng[i] == NULL)
+			return (printf("ceiling or floor color error\n"), 1);
 		split = ft_split(data_map->clr_rng[i], ',');
 		j = 0;
 		while(split[j] != NULL)
@@ -122,7 +123,7 @@ int	wall_checker(t_data_map *data_map)
 					printf("The map is not closed/surrounded by walls.\n");
 					return (1);
 				}
-				else if ((x == (ft_strlen(data_map->map[i]) - 1))
+				else if ((x == (int)(ft_strlen(data_map->map[i]) - 1))
 						&& (data_map->map[i][x - 1] != '1'))
 				{
 					printf("The map is not closed/surrounded by walls.\n");
@@ -151,42 +152,4 @@ int	wall_checker(t_data_map *data_map)
 	return (0);
 }
 
-int	main(void)
-{
-	t_data_map	data_map;
 
-	data_map.pth_img = malloc(sizeof(char *) * 5);
-	if (data_map.pth_img == NULL)
-	{
-		printf("Error al asignar memoria para pth_img\n");
-		return (1);
-	}
-	data_map.pth_img[4] = NULL;
-	data_map.clr_rng = malloc(sizeof(char *) * 3);
-	if (data_map.clr_rng == NULL)
-	{
-		printf("Error al asignar memoria para pth_img\n");
-		return (1);
-	}
-	data_map.clr_rng[2] = NULL;
-	data_map.map = NULL;
-	if (init_str_map("./prueba.cub", &data_map) == 1)
-	{
-		free_matrix(data_map.pth_img);
-		free_matrix(data_map.clr_rng);
-		exit(EXIT_FAILURE);		
-	}
-	//*************PRUEBA********************
-	if (check_rgb_num(&data_map) || chr_checker(&data_map) == 1 || check_line_empty(&data_map) == 1 || wall_checker(&data_map) == 1 )
-	{
-		free_matrix(data_map.pth_img);
-		free_matrix(data_map.clr_rng);
-		free_matrix(data_map.map);
-		exit(EXIT_FAILURE);		
-	}
-	//*********LIBERAR MEMORIA***************
-	free_matrix(data_map.pth_img);
-	free_matrix(data_map.clr_rng);
-	free_matrix(data_map.map);
-	return (0);
-}

@@ -6,11 +6,11 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:34:15 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/09/30 12:03:58 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/03 11:42:27 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Parse_cb.h"
+#include "../include/Parse_cb.h"
 
 void	free_matrix(char **matrix)
 {

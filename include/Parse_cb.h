@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 11:42:52 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/01 17:04:54 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/02 18:40:09 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,19 @@ typedef struct str_img_clr
 	mlx_texture_t	*south_texture;	//	TEXTURA DE LOS MUROS DEL SUR
 	mlx_texture_t	*west_texture;	//	TEXTURA DE LOS MUROS DEL OESTE
 	mlx_texture_t	*east_texture;	//	TEXTURA DE LOS MUROS DEL ESTES
-	//mlx_texture_t	**mlx_clr;
+	uint32_t		rgba_ceiling;	//	COLOR DEL TECHO
+	uint32_t		rgba_floor;		//	COLOR DEL SUELO
 }	t_img_clr;
 
 
 
 int		init_str_map(char *path, t_data_map *data_map);
+int		chr_checker(t_data_map *data_map);
+int 	check_line_empty(t_data_map *data_map);
+int		check_rgb_num(t_data_map *data_map);
+int		wall_checker(t_data_map *data_map);
+int		transform_png(t_img_clr img_clr, t_data_map *data_map);
+void    init_img_clr(t_img_clr *img_clr);
 void	free_matrix(char **matrix);
 
 #endif

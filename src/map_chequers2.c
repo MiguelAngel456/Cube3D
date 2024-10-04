@@ -1,53 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Parse_utils.c                                      :+:      :+:    :+:   */
+/*   map_chequers2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/30 11:34:15 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/04 14:51:37 by mfuente-         ###   ########.fr       */
+/*   Created: 2024/10/04 11:56:57 by mfuente-          #+#    #+#             */
+/*   Updated: 2024/10/04 12:50:31 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/Parse_cb.h"
 
-void	free_matrix(char **matrix)
+int	playable_checker(t_data_map *data_map)
 {
 	int	i;
+	int	x;
+	int	cont;
 
 	i = 0;
-	while (matrix[i])
+	cont = 0;
+	while (data_map->map[i] != NULL)
 	{
-		free(matrix[i]);
+		x = 0;
+		while (data_map->map[i][x] != '\0')
+		{
+			if (data_map->map[i][x] == 'N' || data_map->map[i][x] == 'S'
+				|| data_map->map[i][x] == 'E' || data_map->map[i][x] == 'W')
+				cont++;
+			x++;
+		}
 		i++;
 	}
-	free(matrix);
-}
-
-int	matrix_size(char **matrix)
-{
-	int	i;
-
-	i = 0;
-	while (matrix[i] != NULL)
-		i++;
-	return (i);
-}
-
-void init_str(t_data_map *data_map)
-{
-	int	i;
-	i = 0;
-	while (i < 5)
+	if (cont < 1 || cont > 1)
 	{
-		data_map->pth_img[i] = NULL;
-		i++;
+		printf("incorrect number of playable characters\n");
+		return (1);
 	}
-	i = 0;
-	while (i < 3)
-	{
-		data_map->clr_rng[i] = NULL;
-		i++;
-	}
+	return (0);
 }

@@ -5,14 +5,15 @@ HEADER_PATH = include
 NAME = cub3D
 
 SCRS = 	./src/main.c\
-		./src/map-chequers.c\
+		./src/map_chequers.c\
+		./src/map_chequers2.c\
 		./src/Parse_cb.c\
 		./src/Parse_utils.c\
 		./src/textures_colors.c\
 
 OBJS = $(SCRS:.c=.o)
 
-HEADER = ./Parse_cb.h
+HEADER = ./include/Parse_cb.h
 
 CC = $(shell which cc clang gcc | head -n 1)
 
@@ -35,7 +36,7 @@ make-library-debug:
 	$(MAKE) -C $(LIBFT_PATH) debug
 
 $(NAME): $(OBJS) $(HEADER)
-	$(CC) $(CFLAGS) $(OBJS) $(LIB_FLAGS) $(EXEC-NAME-FLAG) $(NAME)
+	$(CC) -g -o $(CFLAGS) $(OBJS) $(LIB_FLAGS) $(EXEC-NAME-FLAG) $(NAME)
 
 clean:
 	$(MAKE) clean -C $(LIBFT_PATH)

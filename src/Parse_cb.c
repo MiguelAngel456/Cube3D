@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 11:42:24 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/03 11:42:24 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/04 11:34:10 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	save_data(char *line, int *i, char **pth, int pos)
 	aux = ft_split(line, ' ');
 	pth[pos] = ft_strdup(aux[1]);
 	free_matrix(aux);
-	i++;
+	(*i)++;
 }
 
 static int	aux(char *line, int cont[3], t_data_map *data_map, int count_line)
@@ -68,7 +68,8 @@ static int	aux(char *line, int cont[3], t_data_map *data_map, int count_line)
 	cont[2]++;
 	return (count_line);
 }
-static int check_order(t_data_map *data_map)
+
+static int	check_order(t_data_map *data_map)
 {
 	int	i;
 
@@ -117,4 +118,3 @@ int	init_str_map(char *path, t_data_map *data_map)
 	save_map(path, cont[2], count_line, data_map);
 	return (0);
 }
-

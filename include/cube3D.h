@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:35:59 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/02 18:35:45 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/07 18:11:46 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # ifndef HEIGHT
 #  define HEIGHT 1080
 # endif
-# ifndef INFINITY
-#  define INFINITY 1e30
+# ifndef INFINITE
+#  define INFINITE 1e30
 # endif
 
 # include "../MLX42/include/MLX42/MLX42.h"

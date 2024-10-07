@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 20:10:54 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/02 18:42:41 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/07 18:12:02 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void get_ray_dir(t_ray *ray, unsigned int x)
 	ray->ray_dir_y = ray->dir_y + ray->plane_y * ray->camera_x;
 	ray->map_x = (int)ray->pos_x;
     ray->map_y = (int)ray->pos_y;
-	ray->delta_dist_x = ray->ray_dir_x == 0 ? INFINITY: fabs(1 / ray->ray_dir_x);
-	ray->delta_dist_y = ray->ray_dir_y == 0 ? INFINITY: fabs(1 / ray->ray_dir_y);
+	ray->delta_dist_x = ray->ray_dir_x == 0 ? INFINITE: fabs(1 / ray->ray_dir_x);
+	ray->delta_dist_y = ray->ray_dir_y == 0 ? INFINITE: fabs(1 / ray->ray_dir_y);
 }
 
 void get_step_and_side_dist(t_ray *ray)

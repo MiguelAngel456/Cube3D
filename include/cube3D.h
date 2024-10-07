@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:35:59 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/01 21:53:22 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/02 18:35:45 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct s_ray
 	double		side_dist_y;
 	double		delta_dist_x;
 	double		delta_dist_y;
-	double		perpWallDist;
+	double		perp_wall_dist;
 	int			step_x;
 	int			step_y;
 	bool		hit;

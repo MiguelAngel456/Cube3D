@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:30:36 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/01 22:00:26 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/02 19:22:56 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void hooks(void *param)
         test->img->instances[0].x -= 5;*/
 }
 
-static void skybox(t_tests *main)
+/*static void skybox(t_tests *main)
 {
     mlx_image_t *skybox;
 
@@ -59,7 +59,7 @@ static void skybox(t_tests *main)
         }
     }
     
-}
+}*/
 
 static t_ray init_ray(void) 
 {
@@ -82,7 +82,7 @@ static t_ray init_ray(void)
     raycast.side_dist_y = 0;
     raycast.delta_dist_x = 0;
     raycast.delta_dist_y = 0;
-    raycast.perpWallDist = 0;
+    raycast.perp_wall_dist = 0;
     raycast.step_x = 0;
     raycast.step_y = 0;
     raycast.hit = false;
@@ -113,12 +113,12 @@ int	main(void)
     main.mlx = mlx_init(WIDTH, HEIGHT, "cube3D", true);
     if (!main.mlx)
         return(1);
+    //skybox(&main);
     main.img = mlx_new_image(main.mlx, WIDTH, HEIGHT);
     if (!main.img || (mlx_image_to_window(main.mlx, main.img, 0, 0) < 0))
 		return (1);
     //cube_draw(main.img);
     mlx_loop_hook(main.mlx, hooks, &main);
-    skybox(&main);
     t_ray ray = init_ray();
     for (unsigned int x = 0; x < WIDTH; x++)
     {
@@ -126,10 +126,16 @@ int	main(void)
         get_step_and_side_dist(&ray);
         dda(&ray, map);
         if (ray.side == 0)
-            ray.perpWallDist = ray.side_dist_x - ray.delta_dist_x;
+            ray.perp_wall_dist = ray.side_dist_x - ray.delta_dist_x;
         else
-            ray.perpWallDist = ray.side_dist_y - ray.delta_dist_y;
+            ray.perp_wall_dist = ray.side_dist_y - ray.delta_dist_y;
         get_height(&ray);
+        int y = ray.draw_start;
+        while (y < ray.draw_end)
+        {
+            mlx_put_pixel(main.img, x, y, 255 << 24 | 255 << 16 | 255 << 8 | 255);
+            y++;
+        }
     }
     mlx_loop(main.mlx);
 	mlx_terminate(main.mlx);

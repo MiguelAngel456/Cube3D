@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 11:42:52 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/04 14:51:23 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/08 14:42:11 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include <fcntl.h>
 # include <stdarg.h>
 # include <stdlib.h>
-//# include "./MLX42/include/MLX42/MLX42.h"
 
 // PARA EL ARRAY DE DIRECCIONES DE IMAGENES
 # define NO 0
@@ -50,16 +49,24 @@ typedef struct str_img_clr
 	uint32_t		rgba_floor; //		COLOR DEL SUELO
 }		t_img_clr;
 
+// ------------------------Parse_cd.c------------------------
 int		init_str_map(char *path, t_data_map *data_map);
+// ------------------------map_chequers.c------------------------
 int		chr_checker(t_data_map *data_map);
 int		check_line_empty(t_data_map *data_map);
 int		check_rgb_num(t_data_map *data_map);
 int		wall_checker(t_data_map *data_map);
-int		transform_png(t_img_clr img_clr, t_data_map *data_map);
-int		matrix_size(char **matrix);
+// ------------------------map_chequers2.c------------------------
 int		playable_checker(t_data_map *data_map);
+int		wall_checker_3(t_data_map *data_map, int x, int i, int size);
+int		map_exist(t_data_map *data_map);
+// ------------------------texture_colors.c------------------------
+int		transform_png(t_img_clr img_clr, t_data_map *data_map);
 void	init_img_clr(t_img_clr *img_clr);
-void 	init_str(t_data_map *data_map);
+void	get_rgba(int alpha, t_data_map *data_map, t_img_clr *img_clr);
+// ------------------------Parse_utils.c------------------------
+int		matrix_size(char **matrix);
 void	free_matrix(char **matrix);
+void	init_str(t_data_map *data_map);
 
 #endif

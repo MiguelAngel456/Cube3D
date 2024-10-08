@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:34:15 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/04 14:51:37 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/08 11:38:27 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,10 @@ int	matrix_size(char **matrix)
 	return (i);
 }
 
-void init_str(t_data_map *data_map)
+void	init_str(t_data_map *data_map)
 {
 	int	i;
+
 	i = 0;
 	while (i < 5)
 	{

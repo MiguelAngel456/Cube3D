@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 11:56:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/04 12:50:31 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/08 14:39:02 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,27 @@ int	playable_checker(t_data_map *data_map)
 		printf("incorrect number of playable characters\n");
 		return (1);
 	}
+	return (0);
+}
+
+int	wall_checker_3(t_data_map *data_map, int x, int i, int size)
+{
+	int	row_len;
+
+	row_len = ft_strlen(data_map->map[i]);
+	if (i == size && data_map->map[i][x] != '1')
+		return (printf("The map is not surrounded by walls.\n"), 1);
+	else if ((x == row_len - 1) && (data_map->map[i][x - 1] != '1'))
+		return (printf("The map is not surrounded by walls.\n"), 1);
+	else if (x == 0 && (data_map->map[i][x] != ' '
+		&& data_map->map[i][x] != '1'))
+		return (printf("The map is not surrounded by walls.\n"), 1);
+	return (0);
+}
+
+int	map_exist(t_data_map *data_map)
+{
+	if (data_map->map[1] == NULL)
+		return (printf("The map is empty.\n"), 1);
 	return (0);
 }

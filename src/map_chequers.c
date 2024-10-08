@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:20:53 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/04 18:15:13 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/08 12:21:22 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,24 +89,28 @@ int	check_rgb_num(t_data_map *data_map)
 	return (0);
 }
 
-int	wall_checker_2(t_data_map *data_map, int x, int i, int size)
+static int	wall_checker_2(t_data_map *data_map, int x, int i, int size)
 {
-	int row_len;
-	
-	row_len = ft_strlen(data_map->map[i]);
-	if (i == size && data_map->map[i][x] != '1')
-		return (printf("The map is not surrounded by walls.\n"), 1);
- 	else if ((x == row_len - 1) && (data_map->map[i][x - 1] != '1'))
-        return (printf("The map is not surrounded by walls.\n"), 1);
-	else if (x == 0 && (data_map->map[i][x] != ' '
-		&& data_map->map[i][x] != '1'))
-		return (printf("The map is not surrounded by walls.\n"), 1);
+	if (wall_checker_3(data_map, x, i, size) == 1)
+		return (1);
 	else if ((data_map->map[i][x] != '1'
 		&& data_map->map[i][x] != ' ')
 		&& ((data_map->map[i][x - 1] == ' '
 		|| data_map->map[i][x + 1] == ' '
-		|| data_map->map[i + 1][x] == ' ' //ERROR AQUI DE VALGRIN ES ESTA LINEA
-		|| data_map->map[i - 1][x] == ' ')))
+		|| ((int)ft_strlen(data_map->map[i + 1]) > x
+		&& data_map->map[i + 1][x] == ' ')
+		|| ((int)ft_strlen(data_map->map[i - 1]) > x
+		&& data_map->map[i - 1][x] == ' '))))
+	{
+		return (printf("The map is not surrounded by walls.\n"), 1);
+	}
+	else if ((data_map->map[i][x] != '1'
+		&& data_map->map[i][x] != ' '
+		&& data_map->map[i][x] != '\n')
+		&& ((data_map->map[i][x - 1] == ' '
+		|| data_map->map[i][x + 1] == ' '
+		|| ((int)ft_strlen(data_map->map[i + 1]) <= x)
+		|| ((int)ft_strlen(data_map->map[i - 1]) <= x))))
 	{
 		return (printf("The map is not surrounded by walls.\n"), 1);
 	}

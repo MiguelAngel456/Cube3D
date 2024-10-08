@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:46:10 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/04 18:16:04 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/08 14:37:42 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,13 @@ int	main(void)
 	}
 	// -------------PRUEBA-------------
 	//printf("%d\n", wall_checker(&data_map));
+	if (map_exist(&data_map) == 1)
+	{
+		free_matrix(data_map.pth_img);
+		free_matrix(data_map.clr_rng);
+		free_matrix(data_map.map);
+		exit(EXIT_FAILURE);		
+	}
 	if ( playable_checker(&data_map) == 1 || check_rgb_num(&data_map) || chr_checker(&data_map) == 1 || check_line_empty(&data_map) == 1 || wall_checker(&data_map) == 1 )
 	{
 		free_matrix(data_map.pth_img);
@@ -50,13 +57,13 @@ int	main(void)
 		free_matrix(data_map.map);
 		exit(EXIT_FAILURE);		
 	}
-	if (transform_png(img_clr, &data_map) == 1)
+/* 	if (transform_png(img_clr, &data_map) == 1)
     {
         free_matrix(data_map.pth_img);
 		free_matrix(data_map.clr_rng);
 		free_matrix(data_map.map);
 		exit(EXIT_FAILURE);		
-    }
+    } */
 	for (int i = 0; i < 4; i++)
 	{
 		for (int j = 0; j < (int)ft_strlen(data_map.pth_img[i]); j++)

@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:30:36 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/02 19:22:56 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/09 13:15:35 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void hooks(void *param)
         test->img->instances[0].x -= 5;*/
 }
 
-/*static void skybox(t_tests *main)
+static void skybox(t_tests *main)
 {
     mlx_image_t *skybox;
 
@@ -58,21 +58,49 @@ static void hooks(void *param)
                 mlx_put_pixel(skybox, x, y, 0 << 24 | 255 << 16 | 0 << 8 | 255);
         }
     }
-    
-}*/
+}
 
-static t_ray init_ray(void) 
+static void set_orientation(t_ray *raycast, char *argv[])
+{
+    if (argv[1][0] == 'N')
+    {
+        raycast->dir_x = -1;
+        raycast->dir_y = 0;
+        raycast->plane_x = 0;
+        raycast->plane_y = 0.66;
+    }
+    if (argv[1][0] == 'S')
+    {
+        raycast->dir_x = 1;
+        raycast->dir_y = 0;
+        raycast->plane_x = 0;
+        raycast->plane_y = -0.66;
+    }
+    if (argv[1][0] == 'E')
+    {
+        raycast->dir_x = 0;
+        raycast->dir_y = 1;
+        raycast->plane_x = 0.66;
+        raycast->plane_y = 0;
+    }
+    else
+    {
+        raycast->dir_x = 0;
+        raycast->dir_y = -1;
+        raycast->plane_x = -0.66;
+        raycast->plane_y = 0;
+    }
+}
+
+static t_ray init_ray(char *argv[]) 
 {
     t_ray raycast;
 
-    raycast.pos_x = 6; //Might need to erase from struct later on
-    raycast.pos_y = 6;  //Might need to erase from struct later on
+    raycast.pos_x = 6.5; //Might need to erase from struct later on
+    raycast.pos_y = 6.5;  //Might need to erase from struct later on
     raycast.map_x = (int)raycast.pos_x; //Might need to erase from struct later on
     raycast.map_y = (int)raycast.pos_y;  //Might need to erase from struct later on
-    raycast.dir_x = -1;
-    raycast.dir_y = 0;
-    raycast.plane_x = 0;
-    raycast.plane_y = 0.66;
+    set_orientation(&raycast, argv);
     raycast.camera_x = 0;
     raycast.ray_dir_x = 0;
     raycast.ray_dir_y = 0;
@@ -93,10 +121,12 @@ static t_ray init_ray(void)
     return (raycast);
 }
 
-int	main(void)
+int	main(int argc, char *argv[])
 {
+    if (argc != 2)
+        return (1);
     t_tests main;
-    int map [8][8] = 
+    int map [SIZE][SIZE] = 
     {
         {1, 1, 1, 1, 1, 1, 1, 1,},
         {1, 0, 1, 0, 0, 0, 0, 1,},
@@ -113,13 +143,13 @@ int	main(void)
     main.mlx = mlx_init(WIDTH, HEIGHT, "cube3D", true);
     if (!main.mlx)
         return(1);
-    //skybox(&main);
+    skybox(&main);
     main.img = mlx_new_image(main.mlx, WIDTH, HEIGHT);
     if (!main.img || (mlx_image_to_window(main.mlx, main.img, 0, 0) < 0))
 		return (1);
     //cube_draw(main.img);
     mlx_loop_hook(main.mlx, hooks, &main);
-    t_ray ray = init_ray();
+    t_ray ray = init_ray(argv);
     for (unsigned int x = 0; x < WIDTH; x++)
     {
         get_ray_dir(&ray, x);
@@ -130,6 +160,16 @@ int	main(void)
         else
             ray.perp_wall_dist = ray.side_dist_y - ray.delta_dist_y;
         get_height(&ray);
+        if (ray.draw_start > ray.draw_end)
+        {
+            int temp = ray.draw_start;
+            ray.draw_start = ray.draw_end;
+            ray.draw_end = temp;
+        }
+        if (ray.draw_start < 0)
+            ray.draw_start = 0;
+        if (ray.draw_end >= HEIGHT)
+            ray.draw_end = HEIGHT - 1;
         int y = ray.draw_start;
         while (y < ray.draw_end)
         {

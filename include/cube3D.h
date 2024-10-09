@@ -6,20 +6,23 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:35:59 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/07 18:11:46 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/08 20:53:11 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUBE3D_H
 # define CUBE3D_H
 # ifndef WIDTH
-#  define WIDTH 1920
+#  define WIDTH 1280
 # endif
 # ifndef HEIGHT
-#  define HEIGHT 1080
+#  define HEIGHT 720
 # endif
 # ifndef INFINITE
 #  define INFINITE 1e30
+# endif
+# ifndef SIZE
+#  define SIZE 8
 # endif
 
 # include "../MLX42/include/MLX42/MLX42.h"
@@ -63,6 +66,6 @@ typedef struct s_ray
 
 void			get_ray_dir(t_ray *ray, unsigned int x);
 void			get_step_and_side_dist(t_ray *ray);
-void			dda(t_ray *ray, int map[8][8]);
+void			dda(t_ray *ray, int map[SIZE][SIZE]);
 void			get_height(t_ray *ray);
 #endif

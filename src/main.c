@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:30:36 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/09 13:15:35 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/10 17:53:24 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,14 @@ static void set_orientation(t_ray *raycast, char *argv[])
         raycast->plane_x = 0;
         raycast->plane_y = 0.66;
     }
-    if (argv[1][0] == 'S')
+    else if (argv[1][0] == 'S')
     {
         raycast->dir_x = 1;
         raycast->dir_y = 0;
         raycast->plane_x = 0;
         raycast->plane_y = -0.66;
     }
-    if (argv[1][0] == 'E')
+    else if (argv[1][0] == 'E')
     {
         raycast->dir_x = 0;
         raycast->dir_y = 1;

@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:30:36 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/10 19:39:04 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/10 19:45:35 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ static void hooks(void *param)
     else if (mlx_is_key_down(test->mlx, MLX_KEY_W))
     {
         mlx_delete_image(test->mlx, test->img);
-        test->ray->pos_x += test->ray->dir_x * 0.15;
-        test->ray->pos_y += test->ray->dir_y * 0.15;
+        test->ray->pos_x += test->ray->dir_x * SPEED_L;
+        test->ray->pos_y += test->ray->dir_y * SPEED_L;
         test->img = mlx_new_image(test->mlx, WIDTH, HEIGHT);
         mlx_image_to_window(test->mlx, test->img, 0, 0);
         raycast(test->ray, test->map, test);

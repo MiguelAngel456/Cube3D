@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:35:59 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/10 19:09:28 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/10 19:45:24 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 # endif
 # ifndef SIZE
 #  define SIZE 8
+# endif
+# ifndef SPEED_L
+#  define SPEED_L 0.05
 # endif
 
 # include "../MLX42/include/MLX42/MLX42.h"

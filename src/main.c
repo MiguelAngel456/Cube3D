@@ -6,25 +6,11 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:30:36 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/10 17:53:24 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/10 18:35:39 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube3D.h"
-
-/*static void cube_draw(mlx_image_t *img)
-{
-    unsigned int color = 255 << 24 | 255 << 16 | 0 << 8 | 255;
-    unsigned int size = 16;
-
-    for (unsigned int y = 0 ; y < size; y++)
-    {
-        for (unsigned int x = 0; x < size; x++) 
-            mlx_put_pixel(img, x, y, color);
-    }
-    img->instances[0].y += HEIGHT/2;
-    img->instances[0].x += WIDTH/2;
-}*/
 
 static void hooks(void *param)
 {
@@ -96,10 +82,10 @@ static t_ray init_ray(char *argv[])
 {
     t_ray raycast;
 
-    raycast.pos_x = 6.5; //Might need to erase from struct later on
-    raycast.pos_y = 6.5;  //Might need to erase from struct later on
-    raycast.map_x = (int)raycast.pos_x; //Might need to erase from struct later on
-    raycast.map_y = (int)raycast.pos_y;  //Might need to erase from struct later on
+    raycast.pos_x = 6.5;
+    raycast.pos_y = 6.5;  
+    raycast.map_x = (int)raycast.pos_x; 
+    raycast.map_y = (int)raycast.pos_y; 
     set_orientation(&raycast, argv);
     raycast.camera_x = 0;
     raycast.ray_dir_x = 0;
@@ -123,9 +109,11 @@ static t_ray init_ray(char *argv[])
 
 int	main(int argc, char *argv[])
 {
+    t_tests main;
+    t_ray ray;
+    
     if (argc != 2)
         return (1);
-    t_tests main;
     int map [SIZE][SIZE] = 
     {
         {1, 1, 1, 1, 1, 1, 1, 1,},
@@ -137,9 +125,6 @@ int	main(int argc, char *argv[])
         {1, 0, 0, 0, 0, 0, 0, 1,},
         {1, 1, 1, 1, 1, 1, 1, 1,},
     };
-
-    (void)map;
-
     main.mlx = mlx_init(WIDTH, HEIGHT, "cube3D", true);
     if (!main.mlx)
         return(1);
@@ -147,29 +132,14 @@ int	main(int argc, char *argv[])
     main.img = mlx_new_image(main.mlx, WIDTH, HEIGHT);
     if (!main.img || (mlx_image_to_window(main.mlx, main.img, 0, 0) < 0))
 		return (1);
-    //cube_draw(main.img);
     mlx_loop_hook(main.mlx, hooks, &main);
-    t_ray ray = init_ray(argv);
+    ray = init_ray(argv);
     for (unsigned int x = 0; x < WIDTH; x++)
     {
         get_ray_dir(&ray, x);
         get_step_and_side_dist(&ray);
         dda(&ray, map);
-        if (ray.side == 0)
-            ray.perp_wall_dist = ray.side_dist_x - ray.delta_dist_x;
-        else
-            ray.perp_wall_dist = ray.side_dist_y - ray.delta_dist_y;
         get_height(&ray);
-        if (ray.draw_start > ray.draw_end)
-        {
-            int temp = ray.draw_start;
-            ray.draw_start = ray.draw_end;
-            ray.draw_end = temp;
-        }
-        if (ray.draw_start < 0)
-            ray.draw_start = 0;
-        if (ray.draw_end >= HEIGHT)
-            ray.draw_end = HEIGHT - 1;
         int y = ray.draw_start;
         while (y < ray.draw_end)
         {

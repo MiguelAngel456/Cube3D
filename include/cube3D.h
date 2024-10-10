@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:35:59 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/08 20:53:11 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/10 18:41:48 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ typedef struct s_tests
 
 typedef struct s_ray
 {
-	double pos_y; // Might need to delete later from this struct
-	double pos_x; // Might need to delete later from this struct
-	int map_x;    // Might need to delete later from this struct
-	int map_y;    // Might need to delete later from this struct
+	double		pos_y;
+	double		pos_x;
+	int			map_x;
+	int			map_y;
 	double		dir_x;
 	double		dir_y;
 	double		plane_x;

@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:35:59 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/10 18:41:48 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/10 18:50:57 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,5 @@ void			get_ray_dir(t_ray *ray, unsigned int x);
 void			get_step_and_side_dist(t_ray *ray);
 void			dda(t_ray *ray, int map[SIZE][SIZE]);
 void			get_height(t_ray *ray);
+void			raycast(t_ray *ray, int map[SIZE][SIZE], t_tests *main);
 #endif

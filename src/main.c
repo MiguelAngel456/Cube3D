@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:30:36 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/10 18:35:39 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/10 18:54:15 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,6 @@ static void hooks(void *param)
 
     if(mlx_is_key_down(test->mlx, MLX_KEY_ESCAPE))
         mlx_close_window(test->mlx);
-    /*if (mlx_is_key_down(test->mlx, MLX_KEY_W))
-        test->img->instances[0].y -= 5;
-    if (mlx_is_key_down(test->mlx, MLX_KEY_S))
-        test->img->instances[0].y += 5;
-    if (mlx_is_key_down(test->mlx, MLX_KEY_D))
-        test->img->instances[0].x += 5;
-    if (mlx_is_key_down(test->mlx, MLX_KEY_A))
-        test->img->instances[0].x -= 5;*/
 }
 
 static void skybox(t_tests *main)
@@ -134,20 +126,29 @@ int	main(int argc, char *argv[])
 		return (1);
     mlx_loop_hook(main.mlx, hooks, &main);
     ray = init_ray(argv);
-    for (unsigned int x = 0; x < WIDTH; x++)
-    {
-        get_ray_dir(&ray, x);
-        get_step_and_side_dist(&ray);
-        dda(&ray, map);
-        get_height(&ray);
-        int y = ray.draw_start;
-        while (y < ray.draw_end)
-        {
-            mlx_put_pixel(main.img, x, y, 255 << 24 | 255 << 16 | 255 << 8 | 255);
-            y++;
-        }
-    }
+    raycast(&ray, map, &main);
     mlx_loop(main.mlx);
 	mlx_terminate(main.mlx);
 	return (0);
+}
+
+void raycast(t_ray *ray, int map[SIZE][SIZE], t_tests *main)
+{
+    unsigned int x;
+
+    x = 0;
+    while(x < WIDTH)
+    {
+        get_ray_dir(ray, x);
+        get_step_and_side_dist(ray);
+        dda(ray, map);
+        get_height(ray);
+        int y = ray->draw_start;
+        while (y < ray->draw_end)
+        {
+            mlx_put_pixel(main->img, x, y, 255 << 24 | 255 << 16 | 255 << 8 | 255);
+            y++;
+        }
+        x++;
+    }
 }

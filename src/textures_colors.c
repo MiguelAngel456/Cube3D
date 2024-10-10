@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 15:52:06 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/04 11:35:00 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/09 18:40:34 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,16 @@ int	transform_png(t_img_clr img_clr, t_data_map *data_map)
 {
 	img_clr.north_texture = mlx_load_png(data_map->pth_img[NO]);
 	if (img_clr.north_texture == NULL)
-		return (printf("Error with the load north textures\n"), 1);
+		return (printf("Error\nError with the load north textures\n"), 1);
 	img_clr.south_texture = mlx_load_png(data_map->pth_img[SO]);
 	if (img_clr.south_texture == NULL)
-		return (printf("Error with the load south textures\n"), 1);
+		return (printf("Error\nError with the load south textures\n"), 1);
 	img_clr.west_texture = mlx_load_png(data_map->pth_img[WE]);
 	if (img_clr.west_texture == NULL)
-		return (printf("Error with the load west textures\n"), 1);
+		return (printf("Error\nError with the load west textures\n"), 1);
 	img_clr.east_texture = mlx_load_png(data_map->pth_img[EA]);
 	if (img_clr.east_texture == NULL)
-		return (printf("Error with the load east textures\n"), 1);
+		return (printf("Error\nError with the load east textures\n"), 1);
 	return (0);
 }
 // colores //RR,VV,AA

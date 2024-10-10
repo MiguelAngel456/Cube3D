@@ -6,16 +6,45 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:46:10 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/08 14:37:42 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/10 18:29:03 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/Parse_cb.h"
+#include "../include/cube3D.h"
+
+static void skybox(t_tests *main, t_img_clr *img_clr)
+{
+    mlx_image_t *skybox;
+
+    skybox = mlx_new_image(main->mlx, WIDTH, HEIGHT);
+    mlx_image_to_window(main->mlx, skybox, 0, 0);
+    for (unsigned int y = 0; y < HEIGHT; y++)
+    {
+        for (unsigned int x = 0; x < WIDTH; x++)
+        {
+            if (y < HEIGHT/2)
+                mlx_put_pixel(skybox, x, y, img_clr->rgba_floor);
+            else
+                mlx_put_pixel(skybox, x, y, img_clr->rgba_ceiling);
+        }
+    }
+}
+
+static void hooks(mlx_key_data_t keydata, void *param)
+{
+    t_tests *test = (t_tests *)param;
+
+    if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_RELEASE)
+        mlx_close_window(test->mlx);
+}
 
 int	main(void)
 {
 	t_data_map	data_map;
     t_img_clr   img_clr;
+	mlx_t *mlx;
+    t_tests main;	
 
 	init_img_clr(&img_clr);
 	data_map.pth_img = NULL;
@@ -43,6 +72,13 @@ int	main(void)
 	}
 	// -------------PRUEBA-------------
 	//printf("%d\n", wall_checker(&data_map));
+	if (check_basic_map("./prueba.cub") == 1)
+	{
+		free_matrix(data_map.pth_img);
+		free_matrix(data_map.clr_rng);
+		free_matrix(data_map.map);
+		exit(EXIT_FAILURE);		
+	}
 	if (map_exist(&data_map) == 1)
 	{
 		free_matrix(data_map.pth_img);
@@ -57,21 +93,35 @@ int	main(void)
 		free_matrix(data_map.map);
 		exit(EXIT_FAILURE);		
 	}
-/* 	if (transform_png(img_clr, &data_map) == 1)
+	/* if (transform_png(img_clr, &data_map) == 1)
     {
         free_matrix(data_map.pth_img);
 		free_matrix(data_map.clr_rng);
 		free_matrix(data_map.map);
 		exit(EXIT_FAILURE);		
     } */
-	for (int i = 0; i < 4; i++)
-	{
-		for (int j = 0; j < (int)ft_strlen(data_map.pth_img[i]); j++)
-		{
-			printf("%c", data_map.pth_img[i][j]);
-		}
-		printf("\n");
-	}
+//	for (int i = 0; i < 4; i++)
+//	{
+//		for (int j = 0; j < (int)ft_strlen(data_map.pth_img[i]); j++)
+//		{
+//			printf("%c", data_map.pth_img[i][j]);
+//		}
+//		printf("\n");
+//	}
+	get_rgba(255, &data_map, &img_clr);
+    // Inicializar mlx
+    mlx = mlx_init(WIDTH, HEIGHT, "so_long", false);
+    if (mlx == NULL) {
+        fprintf(stderr, "Error initializing mlx\n");
+        return (1);
+    }
+    // Inicializar estructura t_tests
+    main.mlx = mlx;
+    main.img = NULL;
+	skybox(&main, &img_clr);
+    mlx_key_hook(mlx, hooks, &main);
+    mlx_loop(mlx);
+    mlx_terminate(mlx);
 	// -------------LIBERAR MEMORIA-------------
 	if (data_map.pth_img != NULL) {
 		free_matrix(data_map.pth_img);

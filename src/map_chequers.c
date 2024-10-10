@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:20:53 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/08 12:21:22 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/10 14:29:03 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	chr_checker(t_data_map *data_map)
 				&& data_map->map[i][x] != 'S' && data_map->map[i][x] != 'E'
 				&& data_map->map[i][x] != 'W' && data_map->map[i][x] != '\n')
 			{
-				printf("The map contains wrong character\n");
+				printf("Error\nThe map contains wrong character\n");
 				return (1);
 			}
 			x++;
@@ -52,7 +52,7 @@ int	check_line_empty(t_data_map *data_map)
 		{
 			if (ft_strlen(data_map->map[i]) == 1 && data_map->map[i][j] == '\n')
 			{
-				return (printf("Empty line(s) in map\n"), 1);
+				return (printf("Error\nEmpty line(s) in map\n"), 1);
 			}
 			j++;
 		}
@@ -71,7 +71,7 @@ int	check_rgb_num(t_data_map *data_map)
 	while (data_map->clr_rng[i] != NULL)
 	{
 		if (data_map->clr_rng[i] == NULL)
-			return (printf("ceiling or floor color error\n"), 1);
+			return (printf("Error\nceiling or floor color error\n"), 1);
 		split = ft_split(data_map->clr_rng[i], ',');
 		j = 0;
 		while (split[j] != NULL)
@@ -79,6 +79,7 @@ int	check_rgb_num(t_data_map *data_map)
 			if (ft_atoi(split[j]) < 0 || ft_atoi(split[j]) > 256)
 			{
 				free_matrix(split);
+				printf("Error\n");
 				return (printf("ceiling or floor color range error\n"), 1);
 			}
 			j++;
@@ -102,7 +103,7 @@ static int	wall_checker_2(t_data_map *data_map, int x, int i, int size)
 		|| ((int)ft_strlen(data_map->map[i - 1]) > x
 		&& data_map->map[i - 1][x] == ' '))))
 	{
-		return (printf("The map is not surrounded by walls.\n"), 1);
+		return (printf("Error\nThe map is not surrounded by walls.\n"), 1);
 	}
 	else if ((data_map->map[i][x] != '1'
 		&& data_map->map[i][x] != ' '
@@ -112,7 +113,7 @@ static int	wall_checker_2(t_data_map *data_map, int x, int i, int size)
 		|| ((int)ft_strlen(data_map->map[i + 1]) <= x)
 		|| ((int)ft_strlen(data_map->map[i - 1]) <= x))))
 	{
-		return (printf("The map is not surrounded by walls.\n"), 1);
+		return (printf("Error\nThe map is not surrounded by walls.\n"), 1);
 	}
 	return (0);
 }
@@ -134,7 +135,7 @@ int	wall_checker(t_data_map *data_map)
 			{
 				if ((data_map->map[i][x] != '1' && data_map->map[i][x] != ' '
 						&& data_map->map[i][x] != '\n'))
-					return (printf("The map is not surrounded by walls.\n"), 1);
+					return (printf("Error\nthe map isnt surrounded by walls.\n"), 1);
 			}
 			else
 				if (wall_checker_2(data_map, x, i, size) == 1)

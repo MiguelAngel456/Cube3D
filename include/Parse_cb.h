@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 11:42:52 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/08 14:42:11 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/10 12:34:33 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	init_img_clr(t_img_clr *img_clr);
 void	get_rgba(int alpha, t_data_map *data_map, t_img_clr *img_clr);
 // ------------------------Parse_utils.c------------------------
 int		matrix_size(char **matrix);
+int		check_basic_map(char *map);
 void	free_matrix(char **matrix);
 void	init_str(t_data_map *data_map);
 

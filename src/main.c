@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:30:36 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/10 18:54:15 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/10 19:39:04 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,21 @@
 
 static void hooks(void *param)
 {
-   t_tests *test = (t_tests *)param;
+   t_tests *test;
+   
+   test = (t_tests *)param;
 
     if(mlx_is_key_down(test->mlx, MLX_KEY_ESCAPE))
         mlx_close_window(test->mlx);
+    else if (mlx_is_key_down(test->mlx, MLX_KEY_W))
+    {
+        mlx_delete_image(test->mlx, test->img);
+        test->ray->pos_x += test->ray->dir_x * 0.15;
+        test->ray->pos_y += test->ray->dir_y * 0.15;
+        test->img = mlx_new_image(test->mlx, WIDTH, HEIGHT);
+        mlx_image_to_window(test->mlx, test->img, 0, 0);
+        raycast(test->ray, test->map, test);
+    }
 }
 
 static void skybox(t_tests *main)
@@ -70,7 +81,7 @@ static void set_orientation(t_ray *raycast, char *argv[])
     }
 }
 
-static t_ray init_ray(char *argv[]) 
+static void init_ray(t_tests *main, char *argv[]) 
 {
     t_ray raycast;
 
@@ -96,17 +107,16 @@ static t_ray init_ray(char *argv[])
     raycast.line_height = 0;
     raycast.draw_start = 0;
     raycast.draw_end = 0;
-    return (raycast);
+    *main->ray = raycast;
 }
 
 int	main(int argc, char *argv[])
 {
     t_tests main;
-    t_ray ray;
     
     if (argc != 2)
         return (1);
-    int map [SIZE][SIZE] = 
+    int map[SIZE][SIZE] = 
     {
         {1, 1, 1, 1, 1, 1, 1, 1,},
         {1, 0, 1, 0, 0, 0, 0, 1,},
@@ -117,6 +127,7 @@ int	main(int argc, char *argv[])
         {1, 0, 0, 0, 0, 0, 0, 1,},
         {1, 1, 1, 1, 1, 1, 1, 1,},
     };
+    ft_memcpy(main.map, map, sizeof(map));
     main.mlx = mlx_init(WIDTH, HEIGHT, "cube3D", true);
     if (!main.mlx)
         return(1);
@@ -125,10 +136,12 @@ int	main(int argc, char *argv[])
     if (!main.img || (mlx_image_to_window(main.mlx, main.img, 0, 0) < 0))
 		return (1);
     mlx_loop_hook(main.mlx, hooks, &main);
-    ray = init_ray(argv);
-    raycast(&ray, map, &main);
+    main.ray = malloc(sizeof(t_ray));
+    init_ray(&main ,argv);
+    raycast(main.ray, map, &main);
     mlx_loop(main.mlx);
 	mlx_terminate(main.mlx);
+    free(main.ray);
 	return (0);
 }
 

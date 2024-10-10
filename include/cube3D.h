@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:35:59 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/10 18:50:57 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/10 19:09:28 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,11 @@
 # endif
 
 # include "../MLX42/include/MLX42/MLX42.h"
+# include "../libft/libft.h"
 # include <fcntl.h>
 # include <math.h>
 # include <stdarg.h>
 # include <stdlib.h>
-
-typedef struct s_tests
-{
-	mlx_t		*mlx;
-	mlx_image_t	*img;
-}				t_tests;
 
 typedef struct s_ray
 {
@@ -63,6 +58,14 @@ typedef struct s_ray
 	int			draw_start;
 	int			draw_end;
 }				t_ray;
+
+typedef struct s_tests
+{
+	mlx_t		*mlx;
+	mlx_image_t	*img;
+	int			map[SIZE][SIZE];
+	t_ray		*ray;
+}				t_tests;
 
 void			get_ray_dir(t_ray *ray, unsigned int x);
 void			get_step_and_side_dist(t_ray *ray);

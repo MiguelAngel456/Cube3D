@@ -6,11 +6,24 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:30:36 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/10 19:45:35 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/11 11:49:32 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube3D.h"
+
+static void update_movement(t_tests *main)
+{
+    double   move_x;
+    double   move_y;
+
+    move_x = main->ray->dir_x * SPEED_L;
+    move_y = main->ray->dir_y * SPEED_L;
+    if (main->map[(int)(main->ray->pos_x + move_x)][(int)(main->ray->pos_y)] == 0)
+        main->ray->pos_x += move_x;
+    if (main->map[(int)(main->ray->pos_x)][(int)(main->ray->pos_y + move_y)] == 0)
+        main->ray->pos_y += move_y;
+}
 
 static void hooks(void *param)
 {
@@ -23,8 +36,7 @@ static void hooks(void *param)
     else if (mlx_is_key_down(test->mlx, MLX_KEY_W))
     {
         mlx_delete_image(test->mlx, test->img);
-        test->ray->pos_x += test->ray->dir_x * SPEED_L;
-        test->ray->pos_y += test->ray->dir_y * SPEED_L;
+        update_movement(test);
         test->img = mlx_new_image(test->mlx, WIDTH, HEIGHT);
         mlx_image_to_window(test->mlx, test->img, 0, 0);
         raycast(test->ray, test->map, test);

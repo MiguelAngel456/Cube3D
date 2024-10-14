@@ -6,19 +6,19 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:30:36 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/11 11:49:32 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/14 16:34:17 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube3D.h"
 
-static void update_movement(t_tests *main)
+static void update_movement(t_tests *main, double dir_x, double dir_y)
 {
     double   move_x;
     double   move_y;
 
-    move_x = main->ray->dir_x * SPEED_L;
-    move_y = main->ray->dir_y * SPEED_L;
+    move_x = dir_x * SPEED_L;
+    move_y = dir_y * SPEED_L;
     if (main->map[(int)(main->ray->pos_x + move_x)][(int)(main->ray->pos_y)] == 0)
         main->ray->pos_x += move_x;
     if (main->map[(int)(main->ray->pos_x)][(int)(main->ray->pos_y + move_y)] == 0)
@@ -36,7 +36,31 @@ static void hooks(void *param)
     else if (mlx_is_key_down(test->mlx, MLX_KEY_W))
     {
         mlx_delete_image(test->mlx, test->img);
-        update_movement(test);
+        update_movement(test, test->ray->dir_x, test->ray->dir_y);
+        test->img = mlx_new_image(test->mlx, WIDTH, HEIGHT);
+        mlx_image_to_window(test->mlx, test->img, 0, 0);
+        raycast(test->ray, test->map, test);
+    }
+    else if (mlx_is_key_down(test->mlx, MLX_KEY_S))
+    {
+        mlx_delete_image(test->mlx, test->img);
+        update_movement(test, test->ray->dir_x * -1, test->ray->dir_y * -1);
+        test->img = mlx_new_image(test->mlx, WIDTH, HEIGHT);
+        mlx_image_to_window(test->mlx, test->img, 0, 0);
+        raycast(test->ray, test->map, test);
+    }
+    else if (mlx_is_key_down(test->mlx, MLX_KEY_A))
+    {
+        mlx_delete_image(test->mlx, test->img);
+        update_movement(test, test->ray->dir_y * -1, test->ray->dir_x);
+        test->img = mlx_new_image(test->mlx, WIDTH, HEIGHT);
+        mlx_image_to_window(test->mlx, test->img, 0, 0);
+        raycast(test->ray, test->map, test);
+    }
+    else if (mlx_is_key_down(test->mlx, MLX_KEY_D))
+    {
+        mlx_delete_image(test->mlx, test->img);
+        update_movement(test, test->ray->dir_y, test->ray->dir_x * -1);
         test->img = mlx_new_image(test->mlx, WIDTH, HEIGHT);
         mlx_image_to_window(test->mlx, test->img, 0, 0);
         raycast(test->ray, test->map, test);

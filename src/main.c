@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:30:36 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/14 16:34:17 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/14 17:01:35 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,19 @@ static void update_movement(t_tests *main, double dir_x, double dir_y)
         main->ray->pos_x += move_x;
     if (main->map[(int)(main->ray->pos_x)][(int)(main->ray->pos_y + move_y)] == 0)
         main->ray->pos_y += move_y;
+}
+
+static void rotate(t_tests *main, int dir)
+{
+    t_angles angles;
+
+    angles.angle = dir * ROT_SPEED;
+    angles.prev_dir_x = main->ray->dir_x;
+    angles.prev_plane_x = main->ray->plane_x;
+    main->ray->dir_x = angles.prev_dir_x * cos(angles.angle) - main->ray->dir_y * sin(angles.angle);
+    main->ray->dir_y = angles.prev_dir_x * sin(angles.angle) + main->ray->dir_y * cos(angles.angle);
+    main->ray->plane_x = angles.prev_plane_x * cos(angles.angle) - main->ray->plane_y * sin(angles.angle);
+    main->ray->plane_y = angles.prev_plane_x * sin(angles.angle) + main->ray->plane_y * cos(angles.angle);
 }
 
 static void hooks(void *param)
@@ -61,6 +74,22 @@ static void hooks(void *param)
     {
         mlx_delete_image(test->mlx, test->img);
         update_movement(test, test->ray->dir_y, test->ray->dir_x * -1);
+        test->img = mlx_new_image(test->mlx, WIDTH, HEIGHT);
+        mlx_image_to_window(test->mlx, test->img, 0, 0);
+        raycast(test->ray, test->map, test);
+    }
+    else if (mlx_is_key_down(test->mlx, MLX_KEY_LEFT))
+    {
+        mlx_delete_image(test->mlx, test->img);
+        rotate(test, 1);
+        test->img = mlx_new_image(test->mlx, WIDTH, HEIGHT);
+        mlx_image_to_window(test->mlx, test->img, 0, 0);
+        raycast(test->ray, test->map, test);
+    }
+    else if (mlx_is_key_down(test->mlx, MLX_KEY_RIGHT))
+    {
+        mlx_delete_image(test->mlx, test->img);
+        rotate(test, -1);
         test->img = mlx_new_image(test->mlx, WIDTH, HEIGHT);
         mlx_image_to_window(test->mlx, test->img, 0, 0);
         raycast(test->ray, test->map, test);

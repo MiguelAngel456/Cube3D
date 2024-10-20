@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:30:36 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/20 13:02:03 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/20 13:03:12 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,7 @@ static void init_ray(t_tests *main, char *argv[])
     raycast.draw_end = 0;
     raycast.wall_x = 0;
     raycast.tex_x_cord = 0;
-    raycast.texs[0] = mlx_load_png("./imgs/onePiece.png");
+    raycast.texs[0] = mlx_load_png("./imgs/sur.png");
     raycast.texs[1] = mlx_load_png("./imgs/este.png");
     raycast.texs[2] = mlx_load_png("./imgs/norte.png");
     raycast.texs[3] = mlx_load_png("./imgs/oeste.png");

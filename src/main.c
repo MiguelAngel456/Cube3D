@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:30:36 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/14 17:01:35 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/20 13:02:03 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,32 @@ static void init_ray(t_tests *main, char *argv[])
     raycast.line_height = 0;
     raycast.draw_start = 0;
     raycast.draw_end = 0;
+    raycast.wall_x = 0;
+    raycast.tex_x_cord = 0;
+    raycast.texs[0] = mlx_load_png("./imgs/onePiece.png");
+    raycast.texs[1] = mlx_load_png("./imgs/este.png");
+    raycast.texs[2] = mlx_load_png("./imgs/norte.png");
+    raycast.texs[3] = mlx_load_png("./imgs/oeste.png");
+    raycast.tex_step = 0;
+    raycast.tex_pos = 0;
     *main->ray = raycast;
+}
+
+void draw(t_ray *ray, t_tests *main, unsigned int x)
+{
+    uint8_t		*pixel;
+    uint32_t     width;
+    
+    int y = ray->draw_start;
+    while (y < ray->draw_end)
+    {
+        ray->tex_y_coord = (int)ray->tex_pos;
+        ray->tex_pos += ray->tex_step;
+        width = ray->texs[ray->side]->width;
+        pixel = &ray->texs[ray->side]->pixels[width * ray->tex_y_coord * 4 + ray->tex_x_cord * 4];
+        mlx_put_pixel(main->img, x, y, pixel[0] << 24 | pixel[1] << 16 | pixel[2] << 8 | pixel[3]);
+        y++;
+    }
 }
 
 int	main(int argc, char *argv[])
@@ -221,12 +246,25 @@ void raycast(t_ray *ray, int map[SIZE][SIZE], t_tests *main)
         get_step_and_side_dist(ray);
         dda(ray, map);
         get_height(ray);
-        int y = ray->draw_start;
-        while (y < ray->draw_end)
-        {
-            mlx_put_pixel(main->img, x, y, 255 << 24 | 255 << 16 | 255 << 8 | 255);
-            y++;
-        }
-        x++;
+        //Start from here
+        if (ray->side == 0)
+            ray->wall_x = ray->pos_y + ray->perp_wall_dist * ray->ray_dir_y;
+        else
+            ray->wall_x = ray->pos_x + ray->perp_wall_dist * ray->ray_dir_x;
+        ray->wall_x -= floor(ray->wall_x);
+        ray->tex_x_cord = (int)(ray->wall_x * (float)ray->texs[ray->side]->width);
+        ray->tex_x_cord = ray->texs[ray->side]->width - ray->tex_x_cord - 1;
+        if (ray->side == 0 && (ray->map_x - ray->pos_x) >= 0)
+            ray->side += 2;
+        if (ray->side == 1 && (ray->map_y - ray->pos_y) >= 0)
+            ray->side += 2;
+        ray->tex_step = 1.0 * ray->texs[ray->side]->height / ray->line_height;
+        ray->tex_pos = (ray->draw_start - HEIGHT / 2 + ray->line_height / 2) * ray->tex_step;
+        
+        //End here
+       draw(ray, main, x);
+       x++;
     }
 }
+
+

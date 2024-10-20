@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:35:59 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/20 12:52:27 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/20 13:11:09 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ typedef struct s_ray
 	double			wall_x;
 	int				tex_x_cord;
 	int				tex_y_coord;
-	int				tex_step;
+	double			tex_step;
 	double			tex_pos;
 	mlx_texture_t	*texs[4];
 }					t_ray;

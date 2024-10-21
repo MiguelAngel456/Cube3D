@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:35:59 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/21 16:28:51 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/21 17:15:38 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,6 @@
 # endif
 # ifndef INFINITE
 #  define INFINITE 1e30
-# endif
-# ifndef SIZE
-#  define SIZE 8
 # endif
 # ifndef SPEED_L
 #  define SPEED_L 0.05
@@ -78,17 +75,18 @@ typedef struct s_angles
 	double			prev_plane_x;
 }					t_angles;
 
-typedef struct s_tests
+typedef struct s_render
 {
 	mlx_t			*mlx;
 	mlx_image_t		*img;
-	int				map[SIZE][SIZE];
+	t_data_map		*data_map;
 	t_ray			*ray;
-}					t_tests;
+}					t_render;
 
+void				init_mlx(t_data_map *data_map);
 void				get_ray_dir(t_ray *ray, unsigned int x);
 void				get_step_and_side_dist(t_ray *ray);
-void				dda(t_ray *ray, int map[SIZE][SIZE]);
+void				dda(t_ray *ray, t_data_map *map_data);
 void				get_height(t_ray *ray);
-void				raycast(t_ray *ray, int map[SIZE][SIZE], t_tests *main);
+void				raycast(t_ray *ray, t_data_map *data_map, t_render *main);
 #endif

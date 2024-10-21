@@ -6,26 +6,26 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:30:36 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/21 16:32:29 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/21 17:16:23 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube3D.h"
 
-static void update_movement(t_tests *main, double dir_x, double dir_y)
+static void update_movement(t_render *main, double dir_x, double dir_y)
 {
     double   move_x;
     double   move_y;
 
     move_x = dir_x * SPEED_L;
     move_y = dir_y * SPEED_L;
-    if (main->map[(int)(main->ray->pos_x + move_x)][(int)(main->ray->pos_y)] == 0)
+    if (main->data_map->map[(int)(main->ray->pos_x + move_x)][(int)(main->ray->pos_y)] == 0)
         main->ray->pos_x += move_x;
-    if (main->map[(int)(main->ray->pos_x)][(int)(main->ray->pos_y + move_y)] == 0)
+    if (main->data_map->map[(int)(main->ray->pos_x)][(int)(main->ray->pos_y + move_y)] == 0)
         main->ray->pos_y += move_y;
 }
 
-static void rotate(t_tests *main, int dir)
+static void rotate(t_render *main, int dir)
 {
     t_angles angles;
 
@@ -40,63 +40,63 @@ static void rotate(t_tests *main, int dir)
 
 static void hooks(void *param)
 {
-   t_tests *test;
+   t_render *main;
    
-   test = (t_tests *)param;
+   main = (t_render *)param;
 
-    if(mlx_is_key_down(test->mlx, MLX_KEY_ESCAPE))
-        mlx_close_window(test->mlx);
-    else if (mlx_is_key_down(test->mlx, MLX_KEY_W))
+    if(mlx_is_key_down(main->mlx, MLX_KEY_ESCAPE))
+        mlx_close_window(main->mlx);
+    else if (mlx_is_key_down(main->mlx, MLX_KEY_W))
     {
-        mlx_delete_image(test->mlx, test->img);
-        update_movement(test, test->ray->dir_x, test->ray->dir_y);
-        test->img = mlx_new_image(test->mlx, WIDTH, HEIGHT);
-        mlx_image_to_window(test->mlx, test->img, 0, 0);
-        raycast(test->ray, test->map, test);
+        mlx_delete_image(main->mlx, main->img);
+        update_movement(main, main->ray->dir_x, main->ray->dir_y);
+        main->img = mlx_new_image(main->mlx, WIDTH, HEIGHT);
+        mlx_image_to_window(main->mlx, main->img, 0, 0);
+        raycast(main->ray, main->data_map, main);
     }
-    else if (mlx_is_key_down(test->mlx, MLX_KEY_S))
+    else if (mlx_is_key_down(main->mlx, MLX_KEY_S))
     {
-        mlx_delete_image(test->mlx, test->img);
-        update_movement(test, test->ray->dir_x * -1, test->ray->dir_y * -1);
-        test->img = mlx_new_image(test->mlx, WIDTH, HEIGHT);
-        mlx_image_to_window(test->mlx, test->img, 0, 0);
-        raycast(test->ray, test->map, test);
+        mlx_delete_image(main->mlx, main->img);
+        update_movement(main, main->ray->dir_x * -1, main->ray->dir_y * -1);
+        main->img = mlx_new_image(main->mlx, WIDTH, HEIGHT);
+        mlx_image_to_window(main->mlx, main->img, 0, 0);
+        raycast(main->ray, main->data_map, main);
     }
-    else if (mlx_is_key_down(test->mlx, MLX_KEY_A))
+    else if (mlx_is_key_down(main->mlx, MLX_KEY_A))
     {
-        mlx_delete_image(test->mlx, test->img);
-        update_movement(test, test->ray->dir_y * -1, test->ray->dir_x);
-        test->img = mlx_new_image(test->mlx, WIDTH, HEIGHT);
-        mlx_image_to_window(test->mlx, test->img, 0, 0);
-        raycast(test->ray, test->map, test);
+        mlx_delete_image(main->mlx, main->img);
+        update_movement(main, main->ray->dir_y * -1, main->ray->dir_x);
+        main->img = mlx_new_image(main->mlx, WIDTH, HEIGHT);
+        mlx_image_to_window(main->mlx, main->img, 0, 0);
+        raycast(main->ray, main->data_map, main);
     }
-    else if (mlx_is_key_down(test->mlx, MLX_KEY_D))
+    else if (mlx_is_key_down(main->mlx, MLX_KEY_D))
     {
-        mlx_delete_image(test->mlx, test->img);
-        update_movement(test, test->ray->dir_y, test->ray->dir_x * -1);
-        test->img = mlx_new_image(test->mlx, WIDTH, HEIGHT);
-        mlx_image_to_window(test->mlx, test->img, 0, 0);
-        raycast(test->ray, test->map, test);
+        mlx_delete_image(main->mlx, main->img);
+        update_movement(main, main->ray->dir_y, main->ray->dir_x * -1);
+        main->img = mlx_new_image(main->mlx, WIDTH, HEIGHT);
+        mlx_image_to_window(main->mlx, main->img, 0, 0);
+        raycast(main->ray, main->data_map, main);
     }
-    else if (mlx_is_key_down(test->mlx, MLX_KEY_LEFT))
+    else if (mlx_is_key_down(main->mlx, MLX_KEY_LEFT))
     {
-        mlx_delete_image(test->mlx, test->img);
-        rotate(test, 1);
-        test->img = mlx_new_image(test->mlx, WIDTH, HEIGHT);
-        mlx_image_to_window(test->mlx, test->img, 0, 0);
-        raycast(test->ray, test->map, test);
+        mlx_delete_image(main->mlx, main->img);
+        rotate(main, 1);
+        main->img = mlx_new_image(main->mlx, WIDTH, HEIGHT);
+        mlx_image_to_window(main->mlx, main->img, 0, 0);
+        raycast(main->ray, main->data_map, main);
     }
-    else if (mlx_is_key_down(test->mlx, MLX_KEY_RIGHT))
+    else if (mlx_is_key_down(main->mlx, MLX_KEY_RIGHT))
     {
-        mlx_delete_image(test->mlx, test->img);
-        rotate(test, -1);
-        test->img = mlx_new_image(test->mlx, WIDTH, HEIGHT);
-        mlx_image_to_window(test->mlx, test->img, 0, 0);
-        raycast(test->ray, test->map, test);
+        mlx_delete_image(main->mlx, main->img);
+        rotate(main, -1);
+        main->img = mlx_new_image(main->mlx, WIDTH, HEIGHT);
+        mlx_image_to_window(main->mlx, main->img, 0, 0);
+        raycast(main->ray, main->data_map, main);
     }
 }
 
-static void skybox(t_tests *main, t_data_map *data_map)
+static void skybox(t_render *main, t_data_map *data_map)
 {
     mlx_image_t *skybox;
     //Check possible errors in new image
@@ -114,23 +114,23 @@ static void skybox(t_tests *main, t_data_map *data_map)
     }
 }
 
-static void set_orientation(t_ray *raycast, char *argv[])
+static void set_orientation(t_ray *raycast, t_data_map *data_map)
 {
-    if (argv[1][0] == 'N')
+    if (data_map->chr == 'N')
     {
         raycast->dir_x = -1;
         raycast->dir_y = 0;
         raycast->plane_x = 0;
         raycast->plane_y = 0.66;
     }
-    else if (argv[1][0] == 'S')
+    else if (data_map->chr == 'S')
     {
         raycast->dir_x = 1;
         raycast->dir_y = 0;
         raycast->plane_x = 0;
         raycast->plane_y = -0.66;
     }
-    else if (argv[1][0] == 'E')
+    else if (data_map->chr == 'E')
     {
         raycast->dir_x = 0;
         raycast->dir_y = 1;
@@ -146,7 +146,7 @@ static void set_orientation(t_ray *raycast, char *argv[])
     }
 }
 
-static void init_ray(t_tests *main, char *argv[]) 
+static void init_ray(t_render *main, t_data_map *map_data) 
 {
     t_ray raycast;
 
@@ -154,7 +154,7 @@ static void init_ray(t_tests *main, char *argv[])
     raycast.pos_y = 6.5;  
     raycast.map_x = (int)raycast.pos_x; 
     raycast.map_y = (int)raycast.pos_y; 
-    set_orientation(&raycast, argv);
+    set_orientation(&raycast, main);
     raycast.camera_x = 0;
     raycast.ray_dir_x = 0;
     raycast.ray_dir_y = 0;
@@ -175,16 +175,17 @@ static void init_ray(t_tests *main, char *argv[])
     raycast.wall_x = 0;
     raycast.tex_x_cord = 0;
     //Implement checks for failures
-    raycast.texs[0] = mlx_load_png("./imgs/onePiece.png");
+    /*raycast.texs[0] = mlx_load_png("./imgs/onePiece.png");
     raycast.texs[1] = mlx_load_png("./imgs/este.png");
     raycast.texs[2] = mlx_load_png("./imgs/norte.png");
-    raycast.texs[3] = mlx_load_png("./imgs/oeste.png");
+    raycast.texs[3] = mlx_load_png("./imgs/oeste.png");*/
     raycast.tex_step = 0;
     raycast.tex_pos = 0;
     *main->ray = raycast;
+    main->data_map = map_data;
 }
 
-void draw(t_ray *ray, t_tests *main, unsigned int x)
+void draw(t_ray *ray, t_render *main, unsigned int x)
 {
     uint8_t		*pixel;
     uint32_t     width;
@@ -202,29 +203,29 @@ void draw(t_ray *ray, t_tests *main, unsigned int x)
     }
 }
 
-void	raycast(t_data_map	*data_map)
+void	init_mlx(t_data_map	*data_map)
 {
-    t_tests main;
+    t_render main;
     
     main.mlx = mlx_init(WIDTH, HEIGHT, "cube3D", true);
     if (!main.mlx)
         return(1);
-    skybox(&main);
+    skybox(&main, data_map);
     main.img = mlx_new_image(main.mlx, WIDTH, HEIGHT);
     if (!main.img || (mlx_image_to_window(main.mlx, main.img, 0, 0) < 0))
 		return (1);
     mlx_loop_hook(main.mlx, hooks, &main);
     //Implement malloc check
     main.ray = malloc(sizeof(t_ray));
-    init_ray(&main ,argv);
-    raycast(main.ray, map, &main);
+    init_ray(&main, data_map);
+    raycast(main.ray, data_map, &main);
     mlx_loop(main.mlx);
 	mlx_terminate(main.mlx);
     free(main.ray);
 	return (0);
 }
 
-void raycast(t_ray *ray, int map[SIZE][SIZE], t_tests *main)
+void raycast(t_ray *ray, t_data_map *data_map, t_render *main)
 {
     unsigned int x;
 
@@ -233,7 +234,7 @@ void raycast(t_ray *ray, int map[SIZE][SIZE], t_tests *main)
     {
         get_ray_dir(ray, x);
         get_step_and_side_dist(ray);
-        dda(ray, map);
+        dda(ray, data_map);
         get_height(ray);
         //Start from here
         if (ray->side == 0)

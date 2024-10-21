@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 20:10:54 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/21 16:27:31 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/21 17:15:54 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	get_step_and_side_dist(t_ray *ray)
 	}
 }
 
-void	dda(t_ray *ray, int map[SIZE][SIZE])
+void	dda(t_ray *ray, t_data_map *map_data)
 {
 	ray->hit = false;
 	while (ray->hit != true)
@@ -70,7 +70,7 @@ void	dda(t_ray *ray, int map[SIZE][SIZE])
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (map[ray->map_x][ray->map_y] > 0)
+		if (map_data->map[ray->map_x][ray->map_y] > 0)
 			ray->hit = true;
 	}
 	if (ray->side == 0)

@@ -51,4 +51,4 @@ re: fclean
 	$(MAKE) all
 
 debug: CFLAGS += -g
-debug: make-library-debug $(NAME)LIBFT_PATH = libft
+debug: make-library-debug $(NAME)

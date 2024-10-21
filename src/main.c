@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:46:10 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/10 18:29:03 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/11 11:46:32 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	main(void)
 	{
 		free_matrix(data_map.pth_img);
 		free_matrix(data_map.clr_rng);
-		exit(EXIT_FAILURE);		
+		exit(EXIT_FAILURE);
 	}
 	// -------------PRUEBA-------------
 	//printf("%d\n", wall_checker(&data_map));

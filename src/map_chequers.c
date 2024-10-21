@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:20:53 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/10 14:29:03 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/21 15:41:57 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ static int	wall_checker_2(t_data_map *data_map, int x, int i, int size)
 	if (wall_checker_3(data_map, x, i, size) == 1)
 		return (1);
 	else if ((data_map->map[i][x] != '1'
-		&& data_map->map[i][x] != ' ')
+		&& data_map->map[i][x] != ' '
+		&& data_map->map[i][x] != '\n')
 		&& ((data_map->map[i][x - 1] == ' '
 		|| data_map->map[i][x + 1] == ' '
 		|| ((int)ft_strlen(data_map->map[i + 1]) > x
@@ -103,7 +104,7 @@ static int	wall_checker_2(t_data_map *data_map, int x, int i, int size)
 		|| ((int)ft_strlen(data_map->map[i - 1]) > x
 		&& data_map->map[i - 1][x] == ' '))))
 	{
-		return (printf("Error\nThe map is not surrounded by walls.\n"), 1);
+		return (printf("Error\nThe map is not surrounded by walls4.\n"), 1);
 	}
 	else if ((data_map->map[i][x] != '1'
 		&& data_map->map[i][x] != ' '
@@ -113,7 +114,7 @@ static int	wall_checker_2(t_data_map *data_map, int x, int i, int size)
 		|| ((int)ft_strlen(data_map->map[i + 1]) <= x)
 		|| ((int)ft_strlen(data_map->map[i - 1]) <= x))))
 	{
-		return (printf("Error\nThe map is not surrounded by walls.\n"), 1);
+		return (printf("Error\nThe map is not surrounded by walls5.\n"), 1);
 	}
 	return (0);
 }
@@ -135,7 +136,7 @@ int	wall_checker(t_data_map *data_map)
 			{
 				if ((data_map->map[i][x] != '1' && data_map->map[i][x] != ' '
 						&& data_map->map[i][x] != '\n'))
-					return (printf("Error\nthe map isnt surrounded by walls.\n"), 1);
+					return (printf("Error\nmap isnt surrounded by walls.\n"), 1);
 			}
 			else
 				if (wall_checker_2(data_map, x, i, size) == 1)

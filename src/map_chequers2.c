@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 11:56:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/09 18:36:26 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/21 15:27:01 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,15 @@ int	wall_checker_3(t_data_map *data_map, int x, int i, int size)
 
 	row_len = ft_strlen(data_map->map[i]);
 	if (i == size && data_map->map[i][x] != '1')
-		return (printf("Error\nThe map is not surrounded by walls.\n"), 1);
-	else if ((x == row_len - 1) && (data_map->map[i][x - 1] != '1'))
-		return (printf("Error\nThe map is not surrounded by walls.\n"), 1);
+		return (printf("Error\nThe map is not surrounded by walls1.\n"), 1);
+	else if ((x == row_len - 1) && (data_map->map[i][x - 1] != '1'
+		&& data_map->map[i][x - 1] != ' '))
+	{
+		return (printf("Error\nThe map is not surrounded by walls2.\n"), 1);
+	}
 	else if (x == 0 && (data_map->map[i][x] != ' '
 		&& data_map->map[i][x] != '1'))
-		return (printf("Error\nThe map is not surrounded by walls.\n"), 1);
+		return (printf("Error\nThe map is not surrounded by walls3.\n"), 1);
 	return (0);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:46:10 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/21 16:27:19 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/21 18:33:18 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,13 +86,13 @@ int	main(void)
 		free_matrix(data_map.map);
 		exit(EXIT_FAILURE);		
 	}
-	if (transform_png(&data_map) == 1)
+/* 	if (transform_png(&data_map) == 1)
     {
         free_matrix(data_map.pth_img);
 		free_matrix(data_map.clr_rng);
 		free_matrix(data_map.map);
 		exit(EXIT_FAILURE);		
-    }
+    } */
 //	for (int i = 0; i < 4; i++)
 //	{
 //		for (int j = 0; j < (int)ft_strlen(data_map.pth_img[i]); j++)

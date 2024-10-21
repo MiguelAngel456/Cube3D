@@ -1,11 +1,10 @@
-
 C 51,218,255
-NO img/MARBFAC2.xpm
+NO ./imgs/norte.png
 F 196,37,196
-SO img/MARBFACE.xpm
-EA img/SKULWAL3.xpm
-WE img/SKULWALL.xpm
-  
+SO ./imgs/sur.png
+EA ./imgs/este.png
+WE ./imgs/oeste.png
+
    1
    11
  1111111        111111111

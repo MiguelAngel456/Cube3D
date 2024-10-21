@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_chequers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:20:53 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/21 16:27:42 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/21 18:36:25 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ static int	wall_checker_2(t_data_map *data_map, int x, int i, int size)
 	if (wall_checker_3(data_map, x, i, size) == 1)
 		return (1);
 	else if ((data_map->map[i][x] != '1'
-		&& data_map->map[i][x] != ' ')
+		&& data_map->map[i][x] != ' '
+		&& data_map->map[i][x] != '\n')
 		&& ((data_map->map[i][x - 1] == ' '
 		|| data_map->map[i][x + 1] == ' '
 		|| ((int)ft_strlen(data_map->map[i + 1]) > x
@@ -123,7 +124,7 @@ int	wall_checker(t_data_map *data_map)
 	int	i;
 	int	x;
 	int	size;
-
+	
 	size = matrix_size(data_map->map);
 	i = 0;
 	while (data_map->map[i] != NULL)

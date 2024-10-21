@@ -3,15 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   map_chequers2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 11:56:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/21 16:27:46 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/21 16:55:41 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube3D.h"
 
+static int get_chr(int i, int x, int cont, t_data_map *data_map)
+{
+	data_map->chr = data_map->map[i][x];
+	data_map->map[i][x] = '0';
+	cont++;
+	return (cont);
+}
 int	playable_checker(t_data_map *data_map)
 {
 	int	i;
@@ -27,7 +34,9 @@ int	playable_checker(t_data_map *data_map)
 		{
 			if (data_map->map[i][x] == 'N' || data_map->map[i][x] == 'S'
 				|| data_map->map[i][x] == 'E' || data_map->map[i][x] == 'W')
-				cont++;
+				{
+					cont = get_chr(i, x, cont, data_map);
+				}
 			x++;
 		}
 		i++;
@@ -39,6 +48,7 @@ int	playable_checker(t_data_map *data_map)
 	}
 	return (0);
 }
+
 
 int	wall_checker_3(t_data_map *data_map, int x, int i, int size)
 {

@@ -15,7 +15,6 @@ SCRS = $(SRC_PATH)/main.c\
 OBJS = $(SCRS:.c=.o)
 
 HEADER = $(HEADER_PATH)/cube3D.h
-	$(HEADER_PATH)/Parse_cb.h
 
 CC = $(shell which cc clang gcc | head -n 1)
 

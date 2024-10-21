@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Parse_cb.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 11:42:52 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/21 16:20:06 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/21 16:59:38 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <fcntl.h>
 # include <stdarg.h>
 # include <stdlib.h>
+# include <stdio.h>
 
 // PARA EL ARRAY DE DIRECCIONES DE IMAGENES
 # define NO 0
@@ -34,9 +35,10 @@
 
 typedef struct str_data_map
 {
-	char **map;            //		COPIA DEL MAPA
-	char **pth_img;        //	MATRIZ DE TODAS LAS IMAGENES
-	char **clr_rng;        //	MATRIZ DE LOS RANGOS DE COLORES
+	char **map;     //		COPIA DEL MAPA
+	char **pth_img; //	MATRIZ DE TODAS LAS IMAGENES
+	char **clr_rng; //	MATRIZ DE LOS RANGOS DE COLORES
+	char			chr;
 	uint32_t rgba_ceiling; //	COLOR DEL TECHO
 	uint32_t		rgba_floor;
 	mlx_texture_t	*textures[4];

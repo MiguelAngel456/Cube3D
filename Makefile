@@ -5,11 +5,17 @@ HEADER_PATH = include
 NAME = cub3D
 
 SCRS = $(SRC_PATH)/main.c\
-$(SRC_PATH)/auxRay.c\
+	$(SRC_PATH)/auxRay.c\
+	$(SRC_PATH)/map_chequers.c\
+	$(SRC_PATH)/map_chequers2.c\
+	$(SRC_PATH)/Parse_cb.c\
+	$(SRC_PATH)/Parse_utils.c\
+	$(SRC_PATH)/textures_colors.c\
 
 OBJS = $(SCRS:.c=.o)
 
 HEADER = $(HEADER_PATH)/cube3D.h
+	$(HEADER_PATH)/Parse_cb.h
 
 CC = $(shell which cc clang gcc | head -n 1)
 
@@ -46,4 +52,4 @@ re: fclean
 	$(MAKE) all
 
 debug: CFLAGS += -g
-debug: make-library-debug $(NAME)
+debug: make-library-debug $(NAME)LIBFT_PATH = libft

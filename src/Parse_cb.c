@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   Parse_cb.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 11:42:24 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/09 18:37:09 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/21 16:27:50 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/Parse_cb.h"
+#include "../include/cube3D.h"
 
 static void	save_map(char *path, int j, int count_line, t_data_map *data_map)
 {

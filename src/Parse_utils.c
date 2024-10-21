@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   Parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:34:15 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/10 13:05:10 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/21 16:27:55 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/Parse_cb.h"
+#include "../include/cube3D.h"
 
 void	free_matrix(char **matrix)
 {

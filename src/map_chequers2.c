@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_chequers2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 11:56:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/09 18:36:26 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/21 16:27:46 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/Parse_cb.h"
+#include "../include/cube3D.h"
 
 int	playable_checker(t_data_map *data_map)
 {

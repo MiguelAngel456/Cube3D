@@ -3,38 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   textures_colors.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 15:52:06 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/09 18:40:34 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/21 16:28:03 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/Parse_cb.h"
+#include "../include/cube3D.h"
 
-void	init_img_clr(t_img_clr *img_clr)
+void	init_img_clr(t_data_map *data_map)
 {
-	img_clr->north_texture = NULL;
-	img_clr->south_texture = NULL;
-	img_clr->west_texture = NULL;
-	img_clr->east_texture = NULL;
-	img_clr->rgba_ceiling = 0;
-	img_clr->rgba_floor = 0;
+	data_map->textures[NO] = NULL;
+	data_map->textures[SO] = NULL;
+	data_map->textures[EA] = NULL;
+	data_map->textures[WE] = NULL;
+	data_map->rgba_ceiling = 0;
+	data_map->rgba_floor = 0;
+	data_map->map = NULL;
+	data_map->pth_img = NULL;
+	data_map->clr_rng = NULL;
 }
 
-int	transform_png(t_img_clr img_clr, t_data_map *data_map)
+int	transform_png(t_data_map *data_map)
 {
-	img_clr.north_texture = mlx_load_png(data_map->pth_img[NO]);
-	if (img_clr.north_texture == NULL)
+	//TO DO: Free memory of png when there are errors
+	data_map->textures[NO] = mlx_load_png(data_map->pth_img[NO]);
+	if (data_map->textures[NO] == NULL)
 		return (printf("Error\nError with the load north textures\n"), 1);
-	img_clr.south_texture = mlx_load_png(data_map->pth_img[SO]);
-	if (img_clr.south_texture == NULL)
+	data_map->textures[SO] = mlx_load_png(data_map->pth_img[SO]);
+	if (data_map->textures[SO] == NULL)
 		return (printf("Error\nError with the load south textures\n"), 1);
-	img_clr.west_texture = mlx_load_png(data_map->pth_img[WE]);
-	if (img_clr.west_texture == NULL)
+	data_map->textures[WE] = mlx_load_png(data_map->pth_img[WE]);
+	if (data_map->textures[WE] == NULL)
 		return (printf("Error\nError with the load west textures\n"), 1);
-	img_clr.east_texture = mlx_load_png(data_map->pth_img[EA]);
-	if (img_clr.east_texture == NULL)
+	data_map->textures[EA] = mlx_load_png(data_map->pth_img[EA]);
+	if (data_map->textures[EA] == NULL)
 		return (printf("Error\nError with the load east textures\n"), 1);
 	return (0);
 }
@@ -60,7 +64,7 @@ static int	*colors_int(char *text)
 	return (rgb);
 }
 
-void	get_rgba(int alpha, t_data_map *data_map, t_img_clr *img_clr)
+void	get_rgba(int alpha, t_data_map *data_map)
 {
 	uint32_t	rgba;
 	int			*colors;
@@ -71,7 +75,7 @@ void	get_rgba(int alpha, t_data_map *data_map, t_img_clr *img_clr)
 	rgba += (unsigned int)colors[1] << 16;
 	rgba += (unsigned int)colors[2] << 8;
 	rgba += alpha;
-	img_clr->rgba_ceiling = rgba;
+	data_map->rgba_ceiling = rgba;
 	free(colors);
 	colors = colors_int(data_map->clr_rng[F]);
 	rgba = 0;
@@ -79,6 +83,6 @@ void	get_rgba(int alpha, t_data_map *data_map, t_img_clr *img_clr)
 	rgba += (unsigned int)colors[1] << 16;
 	rgba += (unsigned int)colors[2] << 8;
 	rgba += alpha;
-	img_clr->rgba_floor = rgba;
+	data_map->rgba_floor = rgba;
 	free(colors);
 }

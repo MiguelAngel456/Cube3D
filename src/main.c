@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:46:10 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/22 16:49:54 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/22 16:55:24 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	main(void)
 	}
 	init_str(&data_map);
 	data_map.map = NULL;
-	if (init_str_map("./prueba.cub", &data_map) == 1)
+	if (init_str_map("./example.cub", &data_map) == 1)
 	{
 		free_matrix(data_map.pth_img);
 		free_matrix(data_map.clr_rng);
@@ -65,7 +65,7 @@ int	main(void)
 	}
 	// -------------PRUEBA-------------
 	//printf("%d\n", wall_checker(&data_map));
-	if (check_basic_map("./prueba.cub") == 1)
+	if (check_basic_map("./example.cub") == 1)
 	{
 		free_matrix(data_map.pth_img);
 		free_matrix(data_map.clr_rng);

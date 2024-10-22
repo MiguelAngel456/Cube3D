@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 11:42:52 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/21 16:59:38 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/22 17:05:39 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ typedef struct str_data_map
 	char **pth_img; //	MATRIZ DE TODAS LAS IMAGENES
 	char **clr_rng; //	MATRIZ DE LOS RANGOS DE COLORES
 	char			chr;
+	int	chrx;
+	int chry;
 	uint32_t rgba_ceiling; //	COLOR DEL TECHO
 	uint32_t		rgba_floor;
 	mlx_texture_t	*textures[4];

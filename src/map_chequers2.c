@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 11:56:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/21 18:24:08 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/22 17:06:24 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 static int get_chr(int i, int x, int cont, t_data_map *data_map)
 {
 	data_map->chr = data_map->map[i][x];
+	data_map->chrx = x;
+	data_map->chry = i;
 	data_map->map[i][x] = '0';
 	cont++;
 	return (cont);

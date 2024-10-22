@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 11:42:24 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/22 16:29:43 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/22 17:26:56 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void	save_map(char *path, int j, int count_line, t_data_map *data_map)
 	x = 0;
 	while ((line))
 	{
+		printf("%s---\n", line);
 		if (i >= (j - count_line))
 		{
 			data_map->map[x] = ft_strdup(line);

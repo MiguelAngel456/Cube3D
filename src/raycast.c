@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:30:36 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/22 17:28:34 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/22 17:41:12 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static void update_movement(t_render *main, double dir_x, double dir_y)
 
     move_x = dir_x * SPEED_L;
     move_y = dir_y * SPEED_L;
-    if (main->data_map->map[(int)(main->ray->pos_x + move_x)][(int)(main->ray->pos_y)] == 0)
+    if (main->data_map->map[(int)(main->ray->pos_x + move_x)][(int)(main->ray->pos_y)] == '0')
         main->ray->pos_x += move_x;
-    if (main->data_map->map[(int)(main->ray->pos_x)][(int)(main->ray->pos_y + move_y)] == 0)
+    if (main->data_map->map[(int)(main->ray->pos_x)][(int)(main->ray->pos_y + move_y)] == '0')
         main->ray->pos_y += move_y;
 }
 
@@ -221,6 +221,7 @@ void	init_mlx(t_data_map	*data_map)
     //Later implement error handling logic
     /*if (!main.img || (mlx_image_to_window(main.mlx, main.img, 0, 0) < 0))
 		return (1);*/
+    mlx_image_to_window(main.mlx, main.img, 0, 0);
     mlx_loop_hook(main.mlx, hooks, &main);
     //Implement malloc check
     main.ray = malloc(sizeof(t_ray));

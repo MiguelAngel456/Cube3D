@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:30:36 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/22 16:47:32 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/22 17:28:34 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,8 +150,8 @@ static void init_ray(t_render *main, t_data_map *map_data)
 {
     t_ray raycast;
 
-    raycast.pos_x = 6.5;
-    raycast.pos_y = 6.5;  
+    raycast.pos_x = (double)(map_data->chrx + 0.5);
+    raycast.pos_y = (double)(map_data->chry + 0.5);  
     raycast.map_x = (int)raycast.pos_x; 
     raycast.map_y = (int)raycast.pos_y; 
     set_orientation(&raycast, map_data);

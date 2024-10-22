@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:30:36 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/22 18:54:13 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/22 19:16:43 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,20 +103,26 @@ static void	hooks(void *param)
 
 static void	skybox(t_render *main, t_data_map *data_map)
 {
-	mlx_image_t	*skybox;
+	mlx_image_t		*skybox;
+	unsigned int	x;
+	unsigned int	y;
 
 	// Check possible errors in new image
+	y = 0;
 	skybox = mlx_new_image(main->mlx, WIDTH, HEIGHT);
 	mlx_image_to_window(main->mlx, skybox, 0, 0);
-	for (unsigned int y = 0; y < HEIGHT; y++)
+	while (y < HEIGHT)
 	{
-		for (unsigned int x = 0; x < WIDTH; x++)
+		x = 0;
+		while (x < WIDTH)
 		{
 			if (y < HEIGHT / 2)
 				mlx_put_pixel(skybox, x, y, data_map->rgba_ceiling);
 			else
 				mlx_put_pixel(skybox, x, y, data_map->rgba_floor);
+			x++;
 		}
+		y++;
 	}
 }
 void	draw(t_ray *ray, t_render *main, unsigned int x)

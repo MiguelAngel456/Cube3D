@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:30:36 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/22 17:41:12 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/22 18:45:00 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,22 +243,7 @@ void raycast(t_ray *ray, t_data_map *data_map, t_render *main)
         get_step_and_side_dist(ray);
         dda(ray, data_map);
         get_height(ray);
-        //Start from here
-        if (ray->side == 0)
-            ray->wall_x = ray->pos_y + ray->perp_wall_dist * ray->ray_dir_y;
-        else
-            ray->wall_x = ray->pos_x + ray->perp_wall_dist * ray->ray_dir_x;
-        ray->wall_x -= floor(ray->wall_x);
-        ray->tex_x_cord = (int)(ray->wall_x * (float)ray->texs[ray->side]->width);
-        ray->tex_x_cord = ray->texs[ray->side]->width - ray->tex_x_cord - 1;
-        if (ray->side == 0 && (ray->map_x - ray->pos_x) >= 0)
-            ray->side += 2;
-        if (ray->side == 1 && (ray->map_y - ray->pos_y) >= 0)
-            ray->side += 2;
-        ray->tex_step = 1.0 * ray->texs[ray->side]->height / ray->line_height;
-        ray->tex_pos = (ray->draw_start - HEIGHT / 2 + ray->line_height / 2) * ray->tex_step;
-        
-        //End here
+        text_calc(ray);
        draw(ray, main, x);
        x++;
     }

@@ -3,40 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:46:10 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/22 17:55:21 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/22 18:39:57 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube3D.h"
-
-/*static void skybox(t_tests *main, t_img_clr *img_clr)
-{
-    mlx_image_t *skybox;
-
-    skybox = mlx_new_image(main->mlx, WIDTH, HEIGHT);
-    mlx_image_to_window(main->mlx, skybox, 0, 0);
-    for (unsigned int y = 0; y < HEIGHT; y++)
-    {
-        for (unsigned int x = 0; x < WIDTH; x++)
-        {
-            if (y < HEIGHT/2)
-                mlx_put_pixel(skybox, x, y, img_clr->rgba_floor);
-            else
-                mlx_put_pixel(skybox, x, y, img_clr->rgba_ceiling);
-        }
-    }
-}*/
-
-/*static void hooks(mlx_key_data_t keydata, void *param)
-{
-    t_tests *test = (t_tests *)param;
-
-    if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_RELEASE)
-        mlx_close_window(test->mlx);
-}*/
 
 int	main(void)
 {

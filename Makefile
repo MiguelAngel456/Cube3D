@@ -13,6 +13,7 @@ SCRS = $(SRC_PATH)/main.c\
 	$(SRC_PATH)/textures_colors.c\
 	$(SRC_PATH)/raycast.c\
 	$(SRC_PATH)/textCalc.c\
+	$(SRC_PATH)/initRay.c\
 
 OBJS = $(SCRS:.c=.o)
 

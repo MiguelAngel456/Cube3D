@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:30:36 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/21 17:16:23 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/22 16:47:32 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ static void init_ray(t_render *main, t_data_map *map_data)
     raycast.pos_y = 6.5;  
     raycast.map_x = (int)raycast.pos_x; 
     raycast.map_y = (int)raycast.pos_y; 
-    set_orientation(&raycast, main);
+    set_orientation(&raycast, map_data);
     raycast.camera_x = 0;
     raycast.ray_dir_x = 0;
     raycast.ray_dir_y = 0;
@@ -174,6 +174,11 @@ static void init_ray(t_render *main, t_data_map *map_data)
     raycast.draw_end = 0;
     raycast.wall_x = 0;
     raycast.tex_x_cord = 0;
+    //Might need to change this later
+    raycast.texs[NO] = map_data->textures[NO];
+    raycast.texs[SO] = map_data->textures[SO];
+    raycast.texs[EA] = map_data->textures[EA];
+    raycast.texs[WE] = map_data->textures[WE];
     //Implement checks for failures
     /*raycast.texs[0] = mlx_load_png("./imgs/onePiece.png");
     raycast.texs[1] = mlx_load_png("./imgs/este.png");
@@ -208,12 +213,14 @@ void	init_mlx(t_data_map	*data_map)
     t_render main;
     
     main.mlx = mlx_init(WIDTH, HEIGHT, "cube3D", true);
-    if (!main.mlx)
-        return(1);
+    //Later implement error handling logic
+    /*if (!main.mlx)
+        return(1);*/
     skybox(&main, data_map);
     main.img = mlx_new_image(main.mlx, WIDTH, HEIGHT);
-    if (!main.img || (mlx_image_to_window(main.mlx, main.img, 0, 0) < 0))
-		return (1);
+    //Later implement error handling logic
+    /*if (!main.img || (mlx_image_to_window(main.mlx, main.img, 0, 0) < 0))
+		return (1);*/
     mlx_loop_hook(main.mlx, hooks, &main);
     //Implement malloc check
     main.ray = malloc(sizeof(t_ray));
@@ -222,7 +229,6 @@ void	init_mlx(t_data_map	*data_map)
     mlx_loop(main.mlx);
 	mlx_terminate(main.mlx);
     free(main.ray);
-	return (0);
 }
 
 void raycast(t_ray *ray, t_data_map *data_map, t_render *main)

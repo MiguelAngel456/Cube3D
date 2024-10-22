@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:46:10 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/22 12:58:46 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/22 16:49:54 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	main(void)
 //		printf("\n");
 //	}
 	get_rgba(255, &data_map);
-
+	init_mlx(&data_map);
     // Inicializar mlx
     /*mlx = mlx_init(WIDTH, HEIGHT, "so_long", false);
     if (mlx == NULL) {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Parse_cb.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 11:42:24 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/21 16:27:50 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/22 16:29:43 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,17 @@ static void	save_map(char *path, int j, int count_line, t_data_map *data_map)
 static void	save_data(char *line, int *i, char **pth, int pos)
 {
 	char	**aux;
+	char	*punt_n;
+	int		pos_n;
 
 	aux = ft_split(line, ' ');
+	if (ft_strncmp(aux[0], "NO", 2) == 0 || ft_strncmp(aux[0], "SO", 2) == 0
+		|| ft_strncmp(aux[0], "WE", 2) == 0 || ft_strncmp(aux[0], "EA", 2) == 0)
+	{
+		punt_n = ft_strchr(aux[1], '\n');
+		pos_n = punt_n - aux[1];
+		aux[1][pos_n] = '\0';
+	}
 	pth[pos] = ft_strdup(aux[1]);
 	free_matrix(aux);
 	(*i)++;

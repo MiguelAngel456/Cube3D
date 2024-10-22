@@ -1,5 +1,5 @@
 C 51,218,255
-NO ./imgs/norte.png
+NO imgs/norte.png
 F 196,37,196
 SO ./imgs/sur.png
 EA ./imgs/este.png

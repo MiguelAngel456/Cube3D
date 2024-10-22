@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:20:53 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/22 17:11:00 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/22 17:37:34 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,6 @@ int	wall_checker(t_data_map *data_map)
 	
 	size = matrix_size(data_map->map);
 	i = 0;
-	//printf("%s---\n", data_map->map[0]);
 	while (data_map->map[i] != NULL)
 	{
 		x = 0;

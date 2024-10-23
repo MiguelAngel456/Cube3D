@@ -3,102 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:46:10 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/22 18:39:57 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/23 16:15:22 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube3D.h"
 
-int	main(void)
+void	free_struc_data(t_data_map *data_map)
 {
-	t_data_map	data_map;	
+	int	i;
 
+	i = 0;
+	free_matrix(data_map->pth_img);
+	free_matrix(data_map->clr_rng);
+	free_matrix(data_map->map);
+	while (i < 4)
+	{
+		mlx_delete_texture(data_map->textures[i]);
+		i++;
+	}
+}
+
+int	main(int argc, char **argv)
+{
+	t_data_map	data_map;
+
+	if (argc != 2)
+		return (printf("Numero de argumentos incorrecto.\n"), 1);
 	init_img_clr(&data_map);
 	data_map.pth_img = malloc(sizeof(char *) * 5);
 	if (data_map.pth_img == NULL)
-	{
-		printf("Error al asignar memoria para pth_img\n");
-		return (1);
-	}
+		return (printf("Error al asignar memoria para pth_img\n"), 1);
 	data_map.clr_rng = malloc(sizeof(char *) * 3);
 	if (data_map.clr_rng == NULL)
-	{
-		printf("Error al asignar memoria para clr_rng\n");
-		return (1);
-	}
+		return (printf("Error al asignar memoria para clr_rng\n"), 1);
 	init_str(&data_map);
-	data_map.map = NULL;
-	if (init_str_map("./prueba.cub", &data_map) == 1)
-	{
-		free_matrix(data_map.pth_img);
-		free_matrix(data_map.clr_rng);
-		exit(EXIT_FAILURE);		
-	}
-	// -------------PRUEBA-------------
-	//printf("%d\n", wall_checker(&data_map));
-	if (check_basic_map("./prueba.cub") == 1)
-	{
-		free_matrix(data_map.pth_img);
-		free_matrix(data_map.clr_rng);
-		free_matrix(data_map.map);
-		exit(EXIT_FAILURE);		
-	}
-	if (map_exist(&data_map) == 1)
-	{
-		free_matrix(data_map.pth_img);
-		free_matrix(data_map.clr_rng);
-		free_matrix(data_map.map);
-		exit(EXIT_FAILURE);		
-	}
-	if ( playable_checker(&data_map) == 1 || check_rgb_num(&data_map) || chr_checker(&data_map) == 1 || check_line_empty(&data_map) == 1 || wall_checker(&data_map) == 1 )
-	{
-		free_matrix(data_map.pth_img);
-		free_matrix(data_map.clr_rng);
-		free_matrix(data_map.map);
-		exit(EXIT_FAILURE);		
-	}
-	if (transform_png(&data_map) == 1)
-    {
-        free_matrix(data_map.pth_img);
-		free_matrix(data_map.clr_rng);
-		free_matrix(data_map.map);
-		exit(EXIT_FAILURE);		
-    }
-//	for (int i = 0; i < 4; i++)
-//	{
-//		for (int j = 0; j < (int)ft_strlen(data_map.pth_img[i]); j++)
-//		{
-//			printf("%c", data_map.pth_img[i][j]);
-//		}
-//		printf("\n");
-//	}
+	errors(argv, &data_map);
 	get_rgba(255, &data_map);
 	init_mlx(&data_map);
-    // Inicializar mlx
-    /*mlx = mlx_init(WIDTH, HEIGHT, "so_long", false);
-    if (mlx == NULL) {
-        printf("Error initializing mlx\n");
-        return (1);
-    }
-    // Inicializar estructura t_tests
-    main.mlx = mlx;
-    main.img = NULL;
-	skybox(&main, &img_clr);
-    mlx_key_hook(mlx, hooks, &main);
-    mlx_loop(mlx);
-    mlx_terminate(mlx);*/
-	// -------------LIBERAR MEMORIA-------------
-	if (data_map.pth_img != NULL) {
-		free_matrix(data_map.pth_img);
-	}
-	if (data_map.clr_rng != NULL) {
-		free_matrix(data_map.clr_rng);
-	}
-	if (data_map.map != NULL) {
-		free_matrix(data_map.map); 
-	}
+	free_struc_data(&data_map);
 	return (0);
 }

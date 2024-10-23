@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 11:42:52 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/22 17:05:39 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/23 16:10:03 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include "../libft/libft.h"
 # include <fcntl.h>
 # include <stdarg.h>
-# include <stdlib.h>
 # include <stdio.h>
+# include <stdlib.h>
 
 // PARA EL ARRAY DE DIRECCIONES DE IMAGENES
 # define NO 0
@@ -39,8 +39,8 @@ typedef struct str_data_map
 	char **pth_img; //	MATRIZ DE TODAS LAS IMAGENES
 	char **clr_rng; //	MATRIZ DE LOS RANGOS DE COLORES
 	char			chr;
-	int	chrx;
-	int chry;
+	int				chrx;
+	int				chry;
 	uint32_t rgba_ceiling; //	COLOR DEL TECHO
 	uint32_t		rgba_floor;
 	mlx_texture_t	*textures[4];
@@ -67,5 +67,10 @@ int					matrix_size(char **matrix);
 int					check_basic_map(char *map);
 void				free_matrix(char **matrix);
 void				init_str(t_data_map *data_map);
+//------------------------main.c------------------------
+void				free_struc_data(t_data_map *data_map);
+
+//------------------------archive_errors.c------------------------
+void	errors(char **argv, t_data_map *data_map);
 
 #endif

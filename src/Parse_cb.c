@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 11:42:24 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/22 17:37:28 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/23 17:16:31 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,11 @@ int	init_str_map(char *path, t_data_map *data_map)
 		return (printf("Error\nThe order or existence of map elements\n"), 1);
 	data_map->map = malloc(sizeof(char *) * (count_line + 1));
 	if (data_map->map == NULL)
+	{
+		free_matrix(data_map->pth_img);
+		free_matrix(data_map->clr_rng);
 		return (printf("Error\nError al asignar memoria para map\n"), 1);
+	}
 	save_map(path, cont[2], count_line, data_map);
 	return (0);
 }

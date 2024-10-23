@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:46:10 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/23 16:26:42 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/23 17:14:51 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,11 @@ void	free_struc_data(t_data_map *data_map)
 	free_matrix(data_map->map);
 	while (i < 4)
 	{
-		mlx_delete_texture(data_map->textures[i]);
+		if (data_map->textures[i] != NULL)
+			mlx_delete_texture(data_map->textures[i]);
 		i++;
 	}
 }
-//1. 
-
 int	main(int argc, char **argv)
 {
 	t_data_map	data_map;
@@ -40,7 +39,10 @@ int	main(int argc, char **argv)
 		return (printf("Error al asignar memoria para pth_img\n"), 1);
 	data_map.clr_rng = malloc(sizeof(char *) * 3);
 	if (data_map.clr_rng == NULL)
+	{
+		free_matrix(data_map.pth_img);
 		return (printf("Error al asignar memoria para clr_rng\n"), 1);
+	}
 	init_str(&data_map);
 	errors(argv, &data_map);
 	get_rgba(255, &data_map);

@@ -6,13 +6,14 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:30:36 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/23 16:56:14 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/23 16:56:56 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube3D.h"
 
 static void	skybox(t_render *main, t_data_map *data_map);
+static void	draw(t_ray *ray, t_render *main, unsigned int x);
 
 void	init_mlx(t_data_map *data_map)
 {
@@ -78,7 +79,7 @@ void	raycast(t_ray *ray, t_data_map *data_map, t_render *main)
 	}
 }
 
-void	draw(t_ray *ray, t_render *main, unsigned int x)
+static void	draw(t_ray *ray, t_render *main, unsigned int x)
 {
 	uint8_t		*pixel;
 	uint32_t	width;

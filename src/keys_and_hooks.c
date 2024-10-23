@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 16:41:02 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/23 16:51:55 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/23 17:05:41 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,48 +26,36 @@ void	hooks(void *param)
 	{
 		mlx_delete_image(main->mlx, main->img);
 		update_movement(main, main->ray->dir_x, main->ray->dir_y);
-		main->img = mlx_new_image(main->mlx, WIDTH, HEIGHT);
-		mlx_image_to_window(main->mlx, main->img, 0, 0);
 		raycast(main->ray, main->data_map, main);
 	}
 	else if (mlx_is_key_down(main->mlx, MLX_KEY_S))
 	{
 		mlx_delete_image(main->mlx, main->img);
 		update_movement(main, main->ray->dir_x * -1, main->ray->dir_y * -1);
-		main->img = mlx_new_image(main->mlx, WIDTH, HEIGHT);
-		mlx_image_to_window(main->mlx, main->img, 0, 0);
 		raycast(main->ray, main->data_map, main);
 	}
 	else if (mlx_is_key_down(main->mlx, MLX_KEY_A))
 	{
 		mlx_delete_image(main->mlx, main->img);
 		update_movement(main, main->ray->dir_y * -1, main->ray->dir_x);
-		main->img = mlx_new_image(main->mlx, WIDTH, HEIGHT);
-		mlx_image_to_window(main->mlx, main->img, 0, 0);
 		raycast(main->ray, main->data_map, main);
 	}
 	else if (mlx_is_key_down(main->mlx, MLX_KEY_D))
 	{
 		mlx_delete_image(main->mlx, main->img);
 		update_movement(main, main->ray->dir_y, main->ray->dir_x * -1);
-		main->img = mlx_new_image(main->mlx, WIDTH, HEIGHT);
-		mlx_image_to_window(main->mlx, main->img, 0, 0);
 		raycast(main->ray, main->data_map, main);
 	}
 	else if (mlx_is_key_down(main->mlx, MLX_KEY_LEFT))
 	{
 		mlx_delete_image(main->mlx, main->img);
 		rotate(main, 1);
-		main->img = mlx_new_image(main->mlx, WIDTH, HEIGHT);
-		mlx_image_to_window(main->mlx, main->img, 0, 0);
 		raycast(main->ray, main->data_map, main);
 	}
 	else if (mlx_is_key_down(main->mlx, MLX_KEY_RIGHT))
 	{
 		mlx_delete_image(main->mlx, main->img);
 		rotate(main, -1);
-		main->img = mlx_new_image(main->mlx, WIDTH, HEIGHT);
-		mlx_image_to_window(main->mlx, main->img, 0, 0);
 		raycast(main->ray, main->data_map, main);
 	}
 }

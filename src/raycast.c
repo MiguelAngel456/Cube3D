@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:30:36 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/23 16:56:56 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/23 17:04:35 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,6 @@ void	init_mlx(t_data_map *data_map)
 	if (!main.mlx)
 		free_struc_data(data_map);
 	skybox(&main, data_map);
-	main.img = mlx_new_image(main.mlx, WIDTH, HEIGHT);
-	if (!main.img || (mlx_image_to_window(main.mlx, main.img, 0, 0) < 0))
-		ray_failure(data_map);
 	mlx_loop_hook(main.mlx, hooks, &main);
 	main.ray = malloc(sizeof(t_ray));
 	if (main.ray == NULL)
@@ -66,6 +63,12 @@ void	raycast(t_ray *ray, t_data_map *data_map, t_render *main)
 {
 	unsigned int	x;
 
+	main->img = mlx_new_image(main->mlx, WIDTH, HEIGHT);
+	if (!main->img || (mlx_image_to_window(main->mlx, main->img, 0, 0) < 0))
+	{
+		free(ray);
+		ray_failure(data_map);
+	}
 	x = 0;
 	while (x < WIDTH)
 	{

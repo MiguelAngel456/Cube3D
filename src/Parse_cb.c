@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 11:42:24 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/23 17:16:31 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/23 18:23:13 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	save_data(char *line, int *i, char **pth, int pos)
 	(*i)++;
 }
 
-static int	aux(char *line, int cont[3], t_data_map *data_map, int count_line)
+int	aux(char *line, int cont[3], t_data_map *data_map, int count_line)
 {
 	if (ft_strncmp(line, "NO ", 3) == 0 && cont[0] <= 4)
 		save_data(line, &cont[0], data_map->pth_img, NO);
@@ -104,20 +104,13 @@ int	init_str_map(char *path, t_data_map *data_map)
 	int		fd;
 	int		cont[3];
 	int		count_line;
-	char	*line;
 
 	cont[0] = 0;
 	cont[1] = 0;
 	cont[2] = 0;
 	fd = open(path, O_RDONLY);
-	line = get_next_line(fd);
 	count_line = 0;
-	while (line)
-	{
-		count_line = aux(line, cont, data_map, count_line);
-		free(line);
-		line = get_next_line(fd);
-	}
+	count_line = get_line(fd, cont, count_line, data_map);
 	close(fd);
 	if (check_order(data_map) == 1)
 		return (printf("Error\nThe order or existence of map elements\n"), 1);

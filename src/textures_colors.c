@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 15:52:06 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/23 17:09:43 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/23 18:25:34 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	init_img_clr(t_data_map *data_map)
 
 int	transform_png(t_data_map *data_map)
 {
-	//TO DO: Free memory of png when there are errors
 	data_map->textures[NO] = mlx_load_png(data_map->pth_img[NO]);
 	if (data_map->textures[NO] == NULL)
 		return (printf("Error\nError with the load north textures\n"), 1);

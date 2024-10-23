@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:46:10 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/23 17:14:51 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/23 18:24:33 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	free_struc_data(t_data_map *data_map)
 		i++;
 	}
 }
+
 int	main(int argc, char **argv)
 {
 	t_data_map	data_map;

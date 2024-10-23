@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Parse_cb.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 11:42:52 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/23 16:22:31 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/23 18:27:27 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,15 @@ typedef struct str_data_map
 	char			chr;
 	int				chrx;
 	int				chry;
-	uint32_t		rgba_ceiling; //	COLOR DEL TECHO
+	uint32_t		rgba_ceiling;
 	uint32_t		rgba_floor;
 	mlx_texture_t	*textures[4];
 }					t_data_map;
 
 // ------------------------Parse_cd.c------------------------
 int					init_str_map(char *path, t_data_map *data_map);
+int					aux(char *line, int cont[3], t_data_map *data_map,
+						int count_line);
 // ------------------------map_chequers.c------------------------
 int					chr_checker(t_data_map *data_map);
 int					check_line_empty(t_data_map *data_map);
@@ -67,6 +69,8 @@ int					matrix_size(char **matrix);
 int					check_basic_map(char *map);
 void				free_matrix(char **matrix);
 void				init_str(t_data_map *data_map);
+int					get_line(int fd, int cont[3], int count_line,
+						t_data_map *data_map);
 //------------------------main.c------------------------
 void				free_struc_data(t_data_map *data_map);
 

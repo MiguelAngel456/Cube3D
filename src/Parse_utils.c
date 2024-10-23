@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:34:15 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/21 16:27:55 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/23 18:24:14 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,18 @@ int	check_basic_map(char *map)
 		return (printf("Error\nthe archive dont  exist\n"), 1);
 	close(fd);
 	return (0);
+}
+
+int	get_line(int fd, int cont[3], int count_line, t_data_map *data_map)
+{
+	char	*line;
+
+	line = get_next_line(fd);
+	while (line)
+	{
+		count_line = aux(line, cont, data_map, count_line);
+		free(line);
+		line = get_next_line(fd);
+	}
+	return (count_line);
 }

@@ -6,57 +6,13 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:30:36 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/23 16:49:39 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/23 16:56:14 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube3D.h"
 
-static void	skybox(t_render *main, t_data_map *data_map)
-{
-	mlx_image_t		*skybox;
-	unsigned int	x;
-	unsigned int	y;
-
-	y = 0;
-	skybox = mlx_new_image(main->mlx, WIDTH, HEIGHT);
-	if (skybox == NULL)
-		ray_failure(data_map);
-	mlx_image_to_window(main->mlx, skybox, 0, 0);
-	while (y < HEIGHT)
-	{
-		x = 0;
-		while (x < WIDTH)
-		{
-			if (y < HEIGHT / 2)
-				mlx_put_pixel(skybox, x, y, data_map->rgba_ceiling);
-			else
-				mlx_put_pixel(skybox, x, y, data_map->rgba_floor);
-			x++;
-		}
-		y++;
-	}
-}
-
-void	draw(t_ray *ray, t_render *main, unsigned int x)
-{
-	uint8_t		*pixel;
-	uint32_t	width;
-	int			y;
-
-	y = ray->draw_start;
-	while (y < ray->draw_end)
-	{
-		ray->tex_y_coord = (int)ray->tex_pos;
-		ray->tex_pos += ray->tex_step;
-		width = ray->texs[ray->side]->width;
-		pixel = &ray->texs[ray->side]->pixels[width * ray->tex_y_coord * 4
-			+ ray->tex_x_cord * 4];
-		mlx_put_pixel(main->img, x, y,
-			pixel[0] << 24 | pixel[1] << 16 | pixel[2] << 8 | 255);
-		y++;
-	}
-}
+static void	skybox(t_render *main, t_data_map *data_map);
 
 void	init_mlx(t_data_map *data_map)
 {
@@ -80,6 +36,31 @@ void	init_mlx(t_data_map *data_map)
 	free(main.ray);
 }
 
+static void	skybox(t_render *main, t_data_map *data_map)
+{
+	mlx_image_t		*skybox;
+	unsigned int	x;
+	unsigned int	y;
+
+	y = 0;
+	skybox = mlx_new_image(main->mlx, WIDTH, HEIGHT);
+	if (!skybox || (mlx_image_to_window(main->mlx, skybox, 0, 0) < 0))
+		ray_failure(data_map);
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			if (y < HEIGHT / 2)
+				mlx_put_pixel(skybox, x, y, data_map->rgba_ceiling);
+			else
+				mlx_put_pixel(skybox, x, y, data_map->rgba_floor);
+			x++;
+		}
+		y++;
+	}
+}
+
 void	raycast(t_ray *ray, t_data_map *data_map, t_render *main)
 {
 	unsigned int	x;
@@ -94,6 +75,26 @@ void	raycast(t_ray *ray, t_data_map *data_map, t_render *main)
 		text_calc(ray);
 		draw(ray, main, x);
 		x++;
+	}
+}
+
+void	draw(t_ray *ray, t_render *main, unsigned int x)
+{
+	uint8_t		*pixel;
+	uint32_t	width;
+	int			y;
+
+	y = ray->draw_start;
+	while (y < ray->draw_end)
+	{
+		ray->tex_y_coord = (int)ray->tex_pos;
+		ray->tex_pos += ray->tex_step;
+		width = ray->texs[ray->side]->width;
+		pixel = &ray->texs[ray->side]->pixels[width * ray->tex_y_coord * 4
+			+ ray->tex_x_cord * 4];
+		mlx_put_pixel(main->img, x, y,
+			pixel[0] << 24 | pixel[1] << 16 | pixel[2] << 8 | 255);
+		y++;
 	}
 }
 

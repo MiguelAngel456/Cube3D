@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:18:12 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/23 16:11:16 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/23 16:42:32 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,9 @@ void	errors(char **argv, t_data_map *data_map)
 		free_struc_data(data_map);
 		exit(EXIT_FAILURE);
 	}
-	if (playable_checker(data_map) == 1 || check_rgb_num(data_map))
-	{
-		free_struc_data(data_map);
-		exit(EXIT_FAILURE);
-	}
-	if (chr_checker(data_map) == 1 || check_line_empty(data_map) == 1)
-	{
-		free_struc_data(data_map);
-		exit(EXIT_FAILURE);
-	}
-	if (wall_checker(data_map) == 1 || transform_png(data_map) == 1)
+	if (playable_checker(data_map) == 1 || check_rgb_num(data_map)
+		|| chr_checker(data_map) == 1 || check_line_empty(data_map) == 1
+		|| wall_checker(data_map) == 1 || transform_png(data_map) == 1)
 	{
 		free_struc_data(data_map);
 		exit(EXIT_FAILURE);

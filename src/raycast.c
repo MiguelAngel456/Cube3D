@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:30:36 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/22 19:16:43 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/23 16:38:44 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,18 +151,16 @@ void	init_mlx(t_data_map *data_map)
 	t_render	main;
 
 	main.mlx = mlx_init(WIDTH, HEIGHT, "cube3D", true);
-	// Later implement error handling logic
-	/*if (!main.mlx)
-		return(1);*/
+	if (!main.mlx)
+		free_struc_data(data_map);
 	skybox(&main, data_map);
 	main.img = mlx_new_image(main.mlx, WIDTH, HEIGHT);
-	// Later implement error handling logic
-	/*if (!main.img || (mlx_image_to_window(main.mlx, main.img, 0, 0) < 0))
-		return (1);*/
-	mlx_image_to_window(main.mlx, main.img, 0, 0);
+	if (!main.img || (mlx_image_to_window(main.mlx, main.img, 0, 0) < 0))
+		ray_failure(data_map);
 	mlx_loop_hook(main.mlx, hooks, &main);
-	// Implement malloc check
 	main.ray = malloc(sizeof(t_ray));
+	if (main.ray == NULL)
+		free_struc_data(data_map);
 	init_ray(&main, data_map);
 	raycast(main.ray, data_map, &main);
 	mlx_loop(main.mlx);
@@ -185,4 +183,10 @@ void	raycast(t_ray *ray, t_data_map *data_map, t_render *main)
 		draw(ray, main, x);
 		x++;
 	}
+}
+
+void	ray_failure(t_data_map *map_data)
+{
+	free_struc_data(map_data);
+	exit(EXIT_FAILURE);
 }

@@ -6,14 +6,13 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 16:41:02 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/23 17:18:24 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/23 17:21:23 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube3D.h"
 
-static bool	is_movement(t_render *main);
-static void	get_movement_type(t_render *main);
+static void	is_movement(t_render *main);
 static void	update_movement(t_render *main, double dir_x, double dir_y);
 static void	rotate(t_render *main, int dir);
 
@@ -24,22 +23,18 @@ void	hooks(void *param)
 	main = (t_render *)param;
 	if (mlx_is_key_down(main->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(main->mlx);
-	else if (is_movement(main))
-		get_movement_type(main);
+	else
+		is_movement(main);
 }
 
-static bool	is_movement(t_render *main)
+static void	is_movement(t_render *main)
 {
-	if (mlx_is_key_down(main->mlx, MLX_KEY_W) || mlx_is_key_down(main->mlx,
-			MLX_KEY_S) || mlx_is_key_down(main->mlx, MLX_KEY_A)
-		|| mlx_is_key_down(main->mlx, MLX_KEY_D) || mlx_is_key_down(main->mlx,
-			MLX_KEY_LEFT) || mlx_is_key_down(main->mlx, MLX_KEY_RIGHT))
-		return (true);
-	return (false);
-}
-
-static void	get_movement_type(t_render *main)
-{
+	if (!(mlx_is_key_down(main->mlx, MLX_KEY_W) || mlx_is_key_down(main->mlx,
+				MLX_KEY_S) || mlx_is_key_down(main->mlx, MLX_KEY_A)
+			|| mlx_is_key_down(main->mlx, MLX_KEY_D)
+			|| mlx_is_key_down(main->mlx, MLX_KEY_LEFT)
+			|| mlx_is_key_down(main->mlx, MLX_KEY_RIGHT)))
+		return ;
 	mlx_delete_image(main->mlx, main->img);
 	if (mlx_is_key_down(main->mlx, MLX_KEY_W))
 		update_movement(main, main->ray->dir_x, main->ray->dir_y);

@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:35:59 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/22 18:53:39 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/23 16:31:57 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,5 @@ void				get_height(t_ray *ray);
 void				raycast(t_ray *ray, t_data_map *data_map, t_render *main);
 void				text_calc(t_ray *ray);
 void				init_ray(t_render *main, t_data_map *map_data);
+void				ray_failure(t_data_map *map_data);
 #endif

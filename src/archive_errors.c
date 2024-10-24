@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:18:12 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/23 16:42:32 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/24 18:37:50 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,42 @@ void	errors(char **argv, t_data_map *data_map)
 		free_struc_data(data_map);
 		exit(EXIT_FAILURE);
 	}
+}
+
+int	check_num(char *num)
+{
+	int	i;
+
+	i = 0;
+	while (num[i] != '\0')
+	{
+		if (num[i] != '\n')
+		{
+			if (ft_atoi(&num[i]) == 0 && ft_strncmp(&num[i], "0", 1) != 0)
+			{
+				return (1);
+			}
+		}
+		i++;
+	}
+	return (0);
+}
+
+int	check_cf(char **split, int *j)
+{
+	int	i;
+
+	i = 0;
+	while (split[i] != NULL)
+	{
+		if ((ft_atoi(split[i]) < 0 || ft_atoi(split[i]) > 256)
+			|| check_num(split[i]) == 1)
+		{
+			free_matrix(split);
+			return (printf("Error\nceiling/floor color range error\n"), 1);
+		}
+		i++;
+	}
+	(*j) = i;
+	return (0);
 }

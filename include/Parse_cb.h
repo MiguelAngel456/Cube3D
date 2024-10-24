@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 11:42:52 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/23 18:27:27 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/24 18:38:02 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,7 @@ void				free_struc_data(t_data_map *data_map);
 
 //------------------------archive_errors.c------------------------
 void				errors(char **argv, t_data_map *data_map);
+int					check_num(char *num);
+int					check_cf(char **split, int *j);
 
 #endif

@@ -2,7 +2,7 @@ NO ./imgs/norte.png
 SO ./imgs/sur.png
 WE ./imgs/oeste.png
 EA ./imgs/este.png
-F 255,100,0
+F 11,100,11
 C 255,30,20
 11111111
 10100001

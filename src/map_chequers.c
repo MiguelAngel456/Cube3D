@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:20:53 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/23 12:40:17 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/24 18:37:35 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,15 +74,12 @@ int	check_rgb_num(t_data_map *data_map)
 			return (printf("Error\nceiling or floor color error\n"), 1);
 		split = ft_split(data_map->clr_rng[i], ',');
 		j = 0;
-		while (split[j] != NULL)
+		if (check_cf(split, &j) == 1)
+			return (1);
+		if (j != 3)
 		{
-			if (ft_atoi(split[j]) < 0 || ft_atoi(split[j]) > 256)
-			{
-				free_matrix(split);
-				printf("Error\n");
-				return (printf("ceiling or floor color range error\n"), 1);
-			}
-			j++;
+			free_matrix(split);
+			return (printf("Error\nceiling/floor color range error1\n"), 1);
 		}
 		i++;
 		free_matrix(split);

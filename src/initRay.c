@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 18:49:13 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/22 18:57:22 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/24 17:14:18 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,6 @@ static t_ray	init_coord_and_dir(t_data_map *map_data)
 {
 	t_ray	raycast;
 
-	raycast.pos_x = (double)(map_data->chrx + 0.5);
-	raycast.pos_y = (double)(map_data->chry + 0.5);
-	raycast.map_x = (int)raycast.pos_x;
-	raycast.map_y = (int)raycast.pos_y;
 	raycast.pos_x = (double)(map_data->chrx + 0.5);
 	raycast.pos_y = (double)(map_data->chry + 0.5);
 	raycast.map_x = (int)raycast.pos_x;

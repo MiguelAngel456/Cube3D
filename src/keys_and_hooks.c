@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 16:41:02 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/23 17:21:23 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/24 18:11:07 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,15 @@ static void	is_movement(t_render *main)
 	mlx_delete_image(main->mlx, main->img);
 	if (mlx_is_key_down(main->mlx, MLX_KEY_W))
 		update_movement(main, main->ray->dir_x, main->ray->dir_y);
-	else if (mlx_is_key_down(main->mlx, MLX_KEY_S))
+	if (mlx_is_key_down(main->mlx, MLX_KEY_S))
 		update_movement(main, main->ray->dir_x * -1, main->ray->dir_y * -1);
-	else if (mlx_is_key_down(main->mlx, MLX_KEY_A))
+	if (mlx_is_key_down(main->mlx, MLX_KEY_A))
 		update_movement(main, main->ray->dir_y * -1, main->ray->dir_x);
-	else if (mlx_is_key_down(main->mlx, MLX_KEY_D))
+	if (mlx_is_key_down(main->mlx, MLX_KEY_D))
 		update_movement(main, main->ray->dir_y, main->ray->dir_x * -1);
-	else if (mlx_is_key_down(main->mlx, MLX_KEY_LEFT))
+	if (mlx_is_key_down(main->mlx, MLX_KEY_LEFT))
 		rotate(main, 1);
-	else if (mlx_is_key_down(main->mlx, MLX_KEY_RIGHT))
+	if (mlx_is_key_down(main->mlx, MLX_KEY_RIGHT))
 		rotate(main, -1);
 	raycast(main->ray, main->data_map, main);
 }

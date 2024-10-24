@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_chequers2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 11:56:57 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/23 12:08:35 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/24 17:18:07 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static int	get_chr(int i, int x, int cont, t_data_map *data_map)
 {
 	data_map->chr = data_map->map[i][x];
-	data_map->chrx = x;
-	data_map->chry = i;
+	data_map->chrx = i;
+	data_map->chry = x;
 	data_map->map[i][x] = '0';
 	cont++;
 	return (cont);

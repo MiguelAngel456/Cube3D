@@ -1,7 +1,7 @@
-NO ./imgs/norte.png
-SO ./imgs/sur.png
-WE ./imgs/oeste.png
-EA ./imgs/este.png
+NO ./imgs/superman.png
+SO ./imgs/onePiece.png
+WE ./imgs/pokeBall.png
+EA ./imgs/ambulance.png
 F 255,100,0
 C 255,30,20
 11111111

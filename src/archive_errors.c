@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   archive_errors.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:18:12 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/25 17:18:09 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/25 19:18:04 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube3D.h"
-
 
 void	free_matrix_size(char **matrix, unsigned int len)
 {
@@ -32,7 +31,7 @@ void	errors(char **argv, t_data_map *data_map)
 	if (init_str_map(argv[1], data_map) == 1)
 	{
 		free_matrix_size(data_map->pth_img, 4);
-		free_matrix_size(data_map->clr_rng,2);
+		free_matrix_size(data_map->clr_rng, 2);
 		exit(EXIT_FAILURE);
 	}
 	if (check_basic_map(argv[1]) == 1 || map_exist(data_map) == 1)

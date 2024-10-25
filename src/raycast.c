@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:30:36 by juestrel          #+#    #+#             */
-/*   Updated: 2024/10/23 17:04:35 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/25 17:29:19 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	init_mlx(t_data_map *data_map)
 {
 	t_render	main;
 
-	main.mlx = mlx_init(WIDTH, HEIGHT, "cube3D", true);
+	main.mlx = mlx_init(WIDTH, HEIGHT, "cube3D", false);
 	if (!main.mlx)
 		free_struc_data(data_map);
 	skybox(&main, data_map);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Parse_cb.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 11:42:52 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/25 16:26:07 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/10/25 17:17:44 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 
 // PARA EL ARRAY DE DIRECCIONES DE IMAGENES
 # define NO 0
-# define WE 1
-# define SO 2
+# define SO 1
+# define WE 2
 # define EA 3
 // PARA EL ARRAY DE COLORES
 # define F 0
@@ -78,5 +78,6 @@ void				free_struc_data(t_data_map *data_map);
 void				errors(char **argv, t_data_map *data_map);
 int					check_num(char *num);
 int					check_cf(char **split, int *j);
+void				free_matrix_size(char **matrix, unsigned int len);
 
 #endif

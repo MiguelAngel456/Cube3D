@@ -6,18 +6,33 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:18:12 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/24 18:37:50 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/25 17:18:09 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube3D.h"
 
+
+void	free_matrix_size(char **matrix, unsigned int len)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (i < len)
+	{
+		if (matrix[i] != NULL)
+			free(matrix[i]);
+		i++;
+	}
+	free(matrix);
+}
+
 void	errors(char **argv, t_data_map *data_map)
 {
 	if (init_str_map(argv[1], data_map) == 1)
 	{
-		free_matrix(data_map->pth_img);
-		free_matrix(data_map->clr_rng);
+		free_matrix_size(data_map->pth_img, 4);
+		free_matrix_size(data_map->clr_rng,2);
 		exit(EXIT_FAILURE);
 	}
 	if (check_basic_map(argv[1]) == 1 || map_exist(data_map) == 1)

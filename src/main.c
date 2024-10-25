@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:46:10 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/23 18:24:33 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/25 17:21:20 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	free_struc_data(t_data_map *data_map)
 	int	i;
 
 	i = 0;
-	free_matrix(data_map->pth_img);
-	free_matrix(data_map->clr_rng);
+	free_matrix_size(data_map->pth_img, 4);
+	free_matrix_size(data_map->clr_rng, 2);
 	free_matrix(data_map->map);
 	while (i < 4)
 	{
@@ -41,7 +41,7 @@ int	main(int argc, char **argv)
 	data_map.clr_rng = malloc(sizeof(char *) * 3);
 	if (data_map.clr_rng == NULL)
 	{
-		free_matrix(data_map.pth_img);
+		free(data_map.pth_img);
 		return (printf("Error al asignar memoria para clr_rng\n"), 1);
 	}
 	init_str(&data_map);

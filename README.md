@@ -8,6 +8,10 @@ You can find all of the project details inside the subject pdf. Also, you can us
 If you are a fellow student at 42, DO NOT COPY ANYTHING FROM THIS REPOSITORY THAT 
 YOU DO NOT UNDERSTAND, use it to learn instead.
 
+# Authors
+@MiguelAngel456
+@juan-est145
+
 ## Dependencies
 
 For this project to compile you will need a C compiler, Cmake and the Make command. Also, you will need to install the necessary dependencies for the MLX42 graphic libray to function according to your operating system (POSIX compliant system's are recommended). You can find said dependencies and how to install them here: (https://github.com/codam-coding-college/MLX42).

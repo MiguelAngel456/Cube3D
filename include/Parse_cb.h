@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Parse_cb.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 11:42:52 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/10/25 17:17:44 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/10/29 20:03:00 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 
 // PARA EL ARRAY DE DIRECCIONES DE IMAGENES
 # define NO 0
-# define SO 1
-# define WE 2
+# define WE 1
+# define SO 2
 # define EA 3
 // PARA EL ARRAY DE COLORES
 # define F 0

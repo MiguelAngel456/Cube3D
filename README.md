@@ -9,8 +9,8 @@ If you are a fellow student at 42, DO NOT COPY ANYTHING FROM THIS REPOSITORY THA
 YOU DO NOT UNDERSTAND, use it to learn instead.
 
 # Authors
-@MiguelAngel456
-@juan-est145
+- [@MiguelAngel456](https://www.github.com/MiguelAngel456)
+- [@juan-est145](https://www.github.com/juan-est145)
 
 ## Dependencies
 
